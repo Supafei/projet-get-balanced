@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=getbalanced
+
+1.create_tables 2023-02-20T12:38:40Z Etudiant O'clock <student@teleporter> # creation des tables
