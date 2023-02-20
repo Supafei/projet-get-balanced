@@ -1,0 +1,56 @@
+require('dotenv').config();
+const { faker } = require('@faker-js/faker');
+const { Client } = require('pg'); 
+const client = new Client(); 
+// console.log(client);
+client.connect();
+
+module.exports = client
+
+faker.locale = 'fr';
+const NB_USER = 30;
+
+
+function generateUser(nbUsers) {
+    const users = [];
+    for (let iUser= 0; iUser < nbUsers; iUser +=1){
+        const user = {
+            firstname: faker.name.firstName(),
+            lastname: faker.name.lastName(), 
+            email:faker.internet.email(),
+            birthdate:faker.date.birthdate(),
+            avatar:faker.image.cats(),
+            password:faker.internet.password(),
+            color:faker.color.rgb(),
+        };
+        users.push(user);
+    }
+    // console.log(users)
+    return users;
+}
+
+async function insertUsers(users) {
+    await client.query('TRUNCATE TABLE "user" RESTART IDENTITY CASCADE');
+    const userValues = users.map((user) => `(
+        '${user.firstname}',
+        '${user.lastname}',
+        '${user.email}',
+        '${user.birthdate}',
+        '${user.avatar}',
+        '${user.password}',
+        '${user.color}',
+    )`);
+  console.log(userValues);
+    const queryStr = `INSERT INTO "user" (firstname, lastname, email, birthdate, avatar, password, color) VALUES ${userValues} RETURNING id`;
+    // const result = await db.query(queryStr);
+    return result.rows;
+}
+
+
+(async () => { 
+const users = generateUser(NB_USER);
+const insertedUsers = await insertUsers(users);
+
+
+
+})();
