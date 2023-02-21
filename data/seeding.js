@@ -5,7 +5,7 @@ const client = new Client();
 // console.log(client);
 client.connect();
 
-module.exports = client
+module.exports = client;
 
 faker.locale = 'fr';
 const NB_USER = 30;
