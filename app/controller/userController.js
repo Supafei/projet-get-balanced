@@ -1,7 +1,13 @@
+const dataMapper = require('../datamapper')
+
 const userController = {
 
     // récupère le profil d'un user
-    async getUser () {
+    async getUser (request, response) {
+
+        let userId = request.params.id;
+        let getUser = await dataMapper.getOneById("user", userId);
+        response.json(getUser);
 
     },
     // router pour logguer un utilisateur

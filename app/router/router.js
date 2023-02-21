@@ -1,16 +1,16 @@
 const express = require("express");
-const { categoryController} = require ("../app/controller/categoryController");
-const { plannerController } = require ("../app/controller/plannerController");
-const { taskController } = require("../app/controller/taskController");
-const { userController } = require ("../app/controller/userController");
+const categoryController = require ("../controller/categoryController");
+const plannerController = require ("../controller/plannerController");
+const taskController = require("../controller/taskController");
+const userController = require ("../controller/userController");
 
 
 const router = express.Router();
 
 
 /** ROUTES USER  */
-router.get("/", userController.getUser ) // récupère le profil d'un user
-router.post("/user/login", userController ) // router pour logguer un utilisateur
+router.get("/", userController.getUser) // récupère le profil d'un user
+// router.post("/user/login", userController. ) // router pour logguer un utilisateur
 router.post("/", userController.addUser) // Ajoute un utilisateur en bdd
 router.put("/:id", userController.updateUser) // modifier un utilisateur en bdd
 router.delete("/:id", userController.deleteUser ) //supprime un utilisateur

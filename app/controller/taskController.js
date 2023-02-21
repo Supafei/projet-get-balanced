@@ -1,3 +1,5 @@
+const dataMapper = require('../datamapper');
+
 const taskController = {
 // récupère les tâches d'un user dans un tableau
     async getUserTasks () {
