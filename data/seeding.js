@@ -14,11 +14,12 @@ const NB_USER = 30;
 function generateUser(nbUsers) {
     const users = [];
     for (let iUser= 0; iUser < nbUsers; iUser +=1){
+        const birthdateUser = faker.date.birthdate()
         const user = {
             firstname: faker.name.firstName(),
             lastname: faker.name.lastName(), 
             email:faker.internet.email(),
-            birthdate:faker.date.birthdate(),
+            birthdate:birthdateUser.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric'}),
             avatar:faker.image.cats(),
             password:faker.internet.password(),
             color:faker.color.rgb(),
@@ -38,19 +39,21 @@ async function insertUsers(users) {
         '${user.birthdate}',
         '${user.avatar}',
         '${user.password}',
-        '${user.color}',
+        '${user.color}'
     )`);
-  console.log(userValues);
+//   console.log(userValues);
     const queryStr = `INSERT INTO "user" (firstname, lastname, email, birthdate, avatar, password, color) VALUES ${userValues} RETURNING id`;
-    // const result = await db.query(queryStr);
-    return result.rows;
+    // console.log(queryStr);
+    const result = await client.query(queryStr);
+     return result.rows;
 }
 
 
 (async () => { 
+
 const users = generateUser(NB_USER);
-const insertedUsers = await insertUsers(users);
+await insertUsers(users);
 
-
+client.end();
 
 })();
