@@ -2,7 +2,24 @@ const { response } = require('express');
 const client = require('./dbClient');
 
 const dataMapper = {
-//fonction générique qui permets de selectionner un élément d'une table en fonction de son id 
+    // fonction générique qui permet de récupérer toutes les colonnes d'une table 
+    async getAll(table){
+        let response;
+        const sqlQuery = `SELECT * FROM ${table}`; 
+        console.log(sqlQuery); 
+
+        try {
+            response = await client.query(sqlQuery);
+
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+
+        return response.rows; 
+
+    },
+//fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
     async getOneById(table, id) {
         let response;
         const sqlQuery = ` SELECT * FROM ${table} WHERE id = ${id}`
@@ -17,7 +34,7 @@ const dataMapper = {
         }
         return response.rows[0];
     },
-// fonction générique qui permets d'ajouter un user en bdd
+// fonction générique qui permet d'ajouter une donnée en bdd
     async insertOne (body, table) {
         let response;
         try {
@@ -82,7 +99,7 @@ const dataMapper = {
         }
         return response;
     },
-
+// fonction générique qui permet de supprimer une donnée en bdd
     async deleteOne(table, id) {
         let response;
         const sqlQuery = ` DELETE * FROM ${table} WHERE id = ${id}`
@@ -112,6 +129,7 @@ const dataMapper = {
 
     },
 
+// fonction générique qui permet de mettre à jour une donnée par son id en bdd
     async updateById (table, column, value) {
         let response;
         const sqlQuery = `UPDATE ${table} SET ${column} = ${value}` ;

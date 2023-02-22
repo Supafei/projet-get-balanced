@@ -15,3 +15,5 @@
 
 - PostgresQL pour la bdd
 - DataMapper
+- Bcrypt
+- 
