@@ -86,12 +86,13 @@ const dataMapper = {
 
 
 
-            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters});`;
+            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters}) RETURN *;`;
             // pas besoin de join les inputs, déjà le bon format (array)
             const values = inputs;
 
 
             response = await client.query(sqlQuery, values);
+            console.log("response",response);
 
 
         } catch (error) {

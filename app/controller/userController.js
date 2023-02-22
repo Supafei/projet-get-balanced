@@ -50,28 +50,31 @@ const userController = {
             lastname,
             email,
             password,
-            confirmation
+            confirmPassword
         } = request.body;
 
+        console.log("body",firstname, lastname,password, confirmPassword
+        );
+        console.log(request.body);
         let addOneUser;
 
 
-        // on vérifie que tous les champs obligatoires sont renseignés
-        if (!email || !password || !confirmation || !firstname || !lastname) {
-            let errorMessage = 'Veuillez remplir tous les champs requis.';
-            return response.text(errorMessage);
-        }
+        // // on vérifie que tous les champs obligatoires sont renseignés
+        // if (!email || !password || !confirmation || !firstname || !lastname) {
+        //     let errorMessage = 'Veuillez remplir tous les champs requis.';
+        //     return response.json({errorMessage});
+        // }
         // je vérifie qu'il ny' a pas déjà cet email en BDD
-        let userWithSameEmail = await dataMapper.getByCondition("\"user\"", )
+        let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", password)
         if (userWithSameEmail) {
             let errorMessage = 'Cet email est déjà utilisé.';
-            return response.text(errorMessage);
+            return response.json({errorMessage});
         }
         // vérification que le password = la confirmation
-        if (password !== confirmation) {
+        if (password !== confirmPassword) {
             let errorMessage = 'Le mot de passe et sa confirmation ne correspondent pas.';
             // on envoie un message d'erreur
-            return response.text(errorMessage);
+            return response.json({errorMessage});
         }
 
         // génération du hash du mot de passe
@@ -84,6 +87,8 @@ const userController = {
             email,
             password: encryptedPassword
         }, "\"user\"");
+
+        console.log("addoneuser",addOneUser);
         response.json(addOneUser);
     },
 
