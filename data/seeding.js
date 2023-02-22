@@ -1,11 +1,7 @@
 require('dotenv').config();
 const { faker } = require('@faker-js/faker');
-const { Client } = require('pg'); 
-const client = new Client(); 
-// console.log(client);
-client.connect();
 
-module.exports = client;
+const client = require('../app/dbClient');
 
 faker.locale = 'fr';
 const NB_USER = 30;
