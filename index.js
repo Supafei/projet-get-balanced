@@ -12,11 +12,12 @@ require("dotenv").config();
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const router = require("./app/router/router");
 
 app.use(router);
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
+  console.log(`App running at http://localhost:${PORT}`)
+})

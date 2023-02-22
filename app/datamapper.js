@@ -80,7 +80,7 @@ const dataMapper = {
         } catch (error) {
             console.log(error);
         }
-        return response.rows[0]
+        return response;
     },
 
     async deleteOne(table, id) {
