@@ -98,15 +98,15 @@ const dataMapper = {
         return response.rows[0];
     },
 
-    async getByCondition(table, value, condition) {
+    async getByCondition(table, column, value) {
         let response;
-        const sqlQuery = `SELECT * FROM ${table} where ${condition} = ${value}`;
+        const sqlQuery = `SELECT * FROM ${table} where ${column} = ${value}`;
 
         try {
             response = await client.query(sqlQuery);
 
         } catch (error) {
-            console.error(505);
+            console.log(error);
         }
         return response.rows[0];
 
