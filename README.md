@@ -13,5 +13,6 @@
 
 ## Choix techniques
 
-- PostgresQL pour la bdd
+- PostgresQL
+- Sqitch
 - DataMapper
