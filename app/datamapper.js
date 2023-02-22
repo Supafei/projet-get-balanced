@@ -1,3 +1,4 @@
+const { response } = require('express');
 const client = require('./dbClient');
 
 const dataMapper = {
@@ -18,6 +19,7 @@ const dataMapper = {
     },
 // fonction générique qui permets d'ajouter un user en bdd
     async insertOne (body, table) {
+        let response;
         try {
 
             console.log(body);
@@ -72,12 +74,55 @@ const dataMapper = {
             const values = inputs;
 
 
-            await client.query(sqlQuery, values);
+            response = await client.query(sqlQuery, values);
 
 
         } catch (error) {
             console.log(error);
         }
+        return response.rows[0]
+    },
+
+    async deleteOne(table, id) {
+        let response;
+        const sqlQuery = ` DELETE * FROM ${table} WHERE id = ${id}`
+        console.log(sqlQuery);
+
+        try {
+            response = await client.query(sqlQuery);
+
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+        return response.rows[0];
+    },
+
+    async getByCondition(table, value, condition) {
+        let response;
+        const sqlQuery = `SELECT * FROM ${table} where ${condition} = ${value}`;
+
+        try {
+            response = await client.query(sqlQuery);
+
+        } catch (error) {
+            console.error(505);
+        }
+        return response.rows[0];
+
+    },
+
+    async updateById (table, column, value) {
+        let response;
+        const sqlQuery = `UPDATE ${table} SET ${column} = ${value}` ;
+
+        try {
+            response = await client.query(sqlQuery);
+
+        } catch (error) {
+            console.error(505);
+        }
+        return response.rows[0];
     }
 
 };
