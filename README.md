@@ -16,3 +16,5 @@
 - PostgresQL
 - Sqitch
 - DataMapper
+- Bcrypt
+- 

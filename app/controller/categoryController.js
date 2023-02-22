@@ -2,7 +2,12 @@ const dataMapper = require('../datamapper');
 
 const categoryController = {
 // récupère toutes les catégories
-    async getAllCategories () {
+    async getAllCategories (_,response) {
+        
+         let getCategories = await dataMapper.getAll("category");
+         console.log(getCategories);
+
+        return response.json(getCategories);
 
     },
 //récupère les tâches d’une catégorie dans un planner
