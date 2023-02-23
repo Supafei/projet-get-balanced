@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('dayjs')
+const dayjs = require('dayjs');
 const { faker } = require('@faker-js/faker');
 
 const client = require('../app/dbClient');
