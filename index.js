@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
 // le package cors permet de spécifier la politique de cors
 const cors = require('cors');
 
@@ -11,11 +12,16 @@ require("dotenv").config();
 
 const PORT = process.env.PORT ?? 3001;
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const router = require("./app/router/router");
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(router);
 

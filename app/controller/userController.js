@@ -53,19 +53,20 @@ const userController = {
             confirmPassword
         } = request.body;
 
-        console.log("body",firstname, lastname,password, confirmPassword
+        console.log("body",firstname, lastname,email, password, confirmPassword
         );
         console.log(request.body);
         let addOneUser;
 
 
-        // // on vérifie que tous les champs obligatoires sont renseignés
-        // if (!email || !password || !confirmation || !firstname || !lastname) {
-        //     let errorMessage = 'Veuillez remplir tous les champs requis.';
-        //     return response.json({errorMessage});
-        // }
+        // on vérifie que tous les champs obligatoires sont renseignés
+        if (!email || !password || !confirmPassword || !firstname || !lastname) {
+            let errorMessage = 'Veuillez remplir tous les champs requis.';
+            return response.json({errorMessage});
+        }
         // je vérifie qu'il ny' a pas déjà cet email en BDD
-        let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", password)
+        let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", email);
+        console.log("sql request", userWithSameEmail);
         if (userWithSameEmail) {
             let errorMessage = 'Cet email est déjà utilisé.';
             return response.json({errorMessage});

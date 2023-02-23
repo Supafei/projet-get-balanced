@@ -86,19 +86,19 @@ const dataMapper = {
 
 
 
-            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters}) RETURN *;`;
+            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters}) RETURNING *;`;
             // pas besoin de join les inputs, déjà le bon format (array)
             const values = inputs;
 
 
             response = await client.query(sqlQuery, values);
-            console.log("response",response);
+            
 
 
         } catch (error) {
             console.log(error);
         }
-        return response;
+        return response.rows[0];
     },
 // fonction générique qui permet de supprimer une donnée en bdd
     async deleteOne(table, id) {
@@ -118,7 +118,9 @@ const dataMapper = {
 
     async getByCondition(table, column, value) {
         let response;
-        const sqlQuery = `SELECT * FROM ${table} where ${column} = ${value}`;
+        console.log(value);
+        console.log(column);
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;
 
         try {
             response = await client.query(sqlQuery);
