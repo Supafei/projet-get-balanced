@@ -15,19 +15,23 @@ const userController = {
     // route pour logguer un utilisateur
     async loginUser(request, response) {
         // ici on a accès aux informations rentrées par l'utilisateur dans le formulaire
-
+console.log(request.body);
+console.log(request.body.email);
         // 1. récupérer les infos du form
-        const email = request.body.email;
-        const password = request.body.password;
+        let {
+            email,
+            password,
+        } = request.body;
+        console.log(email);
 
         // 2. on vérifie que cet utilisateur existe dans la db avec cet email 
-        const userFound = await dataMapper.getByCondition("\"user\"", email, "email")
+        const userFound = await dataMapper.getByCondition("\"user\"","email", email)
         if (!userFound) {
-            return response.text("Aucun utilisateur n'existe avec cet email.");
-            // on "return", car on ne veut pas continuer l'execution du code
+            let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
+            return response.json(errorMessage);
         }
-        console.log(userFound);
-        // si on arrive ici c'est que l'utilisateur exista dans la db (le return arrête l'execution du code)
+        console.log('utilisateur trouvé:', userFound);
+        // si on arrive ici c'est que l'utilisateur existe dans la db (le return arrête l'execution du code)
         // 3. on vérifie aussi le password
         // const validPwd = await bcrypt.compare(password, userFound.password);
         // // validPwd est true si le password est validé, false sinon
@@ -35,9 +39,7 @@ const userController = {
         //     return response.render('login', {
         //         error: "Mot de passe invalide."
         //     });
-        // }
-
-        
+        // }      
     },
 
 

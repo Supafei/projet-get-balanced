@@ -3,6 +3,7 @@ const app = express();
 const session = require('express-session');
 // le package cors permet de spécifier la politique de cors
 const cors = require('cors');
+const middlewareSession = require('./app/middleware/middlewareSession');
 
 // on ajoute un middleware, ici avec les options par défaut, n'importe quel domaine pourra interroger notre API
 // voir la doc et les options si on veut être plus restrictif
@@ -17,11 +18,14 @@ app.use(express.json());
 
 const router = require("./app/router/router");
 
+
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(middlewareSession);
 
 app.use(router);
 
