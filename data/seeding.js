@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dayjs')
 const { faker } = require('@faker-js/faker');
 
 const client = require('../app/dbClient');
@@ -11,11 +12,12 @@ function generateUser(nbUsers) {
     const users = [];
     for (let iUser= 0; iUser < nbUsers; iUser +=1){
         const birthdateUser = faker.date.birthdate();
+        const dayJSFormat = dayjs(birthdateUser);
         const user = {
             firstname: faker.name.firstName(),
             lastname: faker.name.lastName(), 
             email:faker.internet.email(),
-            birthdate: new Date(birthdateUser).getTime(),
+            birthdate: dayJSFormat,
             //birthdateUser.toLocaleDateString('fr-FR', { year: 'numeric',month: '2-digit',day: '2-digit',  , hour: '2-digit', minute: '2-digit', second: '2-digit'}),
             avatar:faker.image.cats(),
             password:faker.internet.password(),
