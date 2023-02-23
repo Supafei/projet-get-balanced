@@ -10,7 +10,7 @@ const router = express.Router();
 
 /** ROUTES USER  */
 router.get("/user/:id", userController.getUser) // récupère le profil d'un user
-// router.post("/user/login", userController. ) // router pour logguer un utilisateur
+router.post("/user/login", userController.loginUser ) // router pour logguer un utilisateur
 router.post("/user/", userController.addUser) // Ajoute un utilisateur en bdd
 router.put("/user/:id", userController.updateUser) // modifier un utilisateur en bdd
 router.delete("/user/:id", userController.deleteUser ) //supprime un utilisateur
