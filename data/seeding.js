@@ -15,7 +15,7 @@ function generateUser(nbUsers) {
             firstname: faker.name.firstName(),
             lastname: faker.name.lastName(), 
             email:faker.internet.email(),
-            birthdate:birthdateUser.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric'}),
+            birthdate:birthdateUser.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'}),
             avatar:faker.image.cats(),
             password:faker.internet.password(),
             color:faker.color.rgb(),
