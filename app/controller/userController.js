@@ -25,12 +25,16 @@ const userController = {
         } = request.body;
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
-        const userFound = await dataMapper.getByCondition("\"user\"", "email", email);
-        console.log("avant la condition userFound",userFound);
+        let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
+        console.log("avant la condition userFound", userFound);
+
+
 
         if (!userFound) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
-            return response.json(errorMessage);
+            return response.status("401").json({
+                errorMessage
+            });
         }
 
         console.log('utilisateur trouvé:', userFound);
@@ -51,7 +55,7 @@ const userController = {
         request.session.user = userFound;
         console.log(request.session.user);
 
-        return userFound;
+        return response.json(userFound);
     },
 
     logOut(request, response) {
@@ -125,31 +129,38 @@ const userController = {
     async updateUser() {
         // j'ai 3 paramètre a définir:
         // 1. Je veux identifier le nom de la colonne à modifier
-        let {
-            firstname,
-            lastname,
-            email,
-            birthdate,
-            avatar,
-            password,
-            color
-        } = request.body;
-        // 2. Je veux définir la nouvelle valeur de la colonne
-        // 3. Je veux identifier l'id de l'user à mettre à jour
+        let updatedDataUser = request.body;
+
+        // je récupère les clés et les valeurs séparément
+        let valuesBody = Object.values(updatedDataUser);
+        let keysBody = Object.keys(updatedDataUser);
+
+        // Je veux identifier l'id de l'user à mettre à jour
         let UpdateUserId = request.params.id;
-        let updateUser = await dataMapper.updateById("\"user\"",{
-            firstname,
-            lastname,
-            email,
-            birthdate,
-            avatar,
-            password,
-            color
-        }, UpdateUserId);
+
+
+        let columnsTable = [];
+        let valuesTable = [];
+        let count = 1;
+
+        for (let value of valuesBody) {
+            valuesTable.push(value);
+            count ++;
+        }
+
+        for (let key of keysBody) {
+            columnsTable.push(key);
+        }
+
+
+        let values = valuesTable.join();
+        let columns = columnsTable.join();
+
+        let updateUser = await dataMapper.updateById("\"user\"", columns, values, UpdateUserId);
 
     },
     //supprime un utilisateur
-    async deleteUser() {
+    async deleteUser(id) {
 
     }
 
