@@ -16,7 +16,7 @@ const userController = {
     async loginUser(request, response) {
 
         // ici on a accès aux informations rentrées par l'utilisateur dans le formulaire
-        console.log(request.body);
+        // console.log(request.body);
 
         // Récupérer les infos du form
         let {
@@ -26,7 +26,7 @@ const userController = {
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
         let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
-        console.log("avant la condition userFound", userFound);
+        // console.log("avant la condition userFound", userFound);
 
 
 
@@ -53,7 +53,7 @@ const userController = {
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
         request.session.user = userFound;
-        console.log(request.session.user);
+        // console.log(request.session.user);
 
         return response.json(userFound);
     },
@@ -161,7 +161,10 @@ const userController = {
     },
     //supprime un utilisateur
     async deleteUser(id) {
-
+            let userId = request.params.id;
+            let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
+           
+        return response.json(deleteUser); 
     }
 
 }
