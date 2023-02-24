@@ -26,7 +26,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// app.use(middlewareSession);
+app.use(middlewareSession.isAuthentified);
 
 app.use(router);
 
