@@ -129,7 +129,15 @@ const userController = {
     async updateUser() {
         // j'ai 3 paramètre a définir:
         // 1. Je veux identifier le nom de la colonne à modifier
-        let updatedDataUser = request.body;
+        let {
+            firstname,
+            lastname,
+            email,
+            avatar,
+            password,
+            birthdate,
+            color
+        } = request.body;
 
         // je récupère les clés et les valeurs séparément
         let valuesBody = Object.values(updatedDataUser);
@@ -138,32 +146,19 @@ const userController = {
         // Je veux identifier l'id de l'user à mettre à jour
         let UpdateUserId = request.params.id;
 
-
-        let columnsTable = [];
-        let valuesTable = [];
-        let count = 1;
-
-        for (let value of valuesBody) {
-            valuesTable.push(value);
-            count ++;
-        }
-
-        for (let key of keysBody) {
-            columnsTable.push(key);
-        }
-
-
-        let values = valuesTable.join();
-        let columns = columnsTable.join();
-
+        
         let updateUser = await dataMapper.updateById("\"user\"", columns, values, UpdateUserId);
+        switch (updateUser) {
+            
+        }
 
     },
     //supprime un utilisateur
-    async deleteUser() {
+    async deleteUser(request, response) {
             let userId = request.params.id;
             let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
            
+        console.log(`nombre de ligne supprimée: ${deleteUser.rowCount}`);
         return response.json(deleteUser); 
     }
 
