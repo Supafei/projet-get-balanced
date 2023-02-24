@@ -25,7 +25,9 @@ const userController = {
         } = request.body;
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
-        const userFound = await dataMapper.getByCondition("\"user\"", "email", email)
+        const userFound = await dataMapper.getByCondition("\"user\"", "email", email);
+        console.log("avant la condition userFound",userFound);
+
         if (!userFound) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
             return response.json(errorMessage);
