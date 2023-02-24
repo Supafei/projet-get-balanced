@@ -47,6 +47,7 @@ const userController = {
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
         request.session.user = userFound;
+        console.log(request.session.user);
 
         return userFound;
     },
