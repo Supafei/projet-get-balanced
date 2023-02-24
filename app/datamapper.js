@@ -132,9 +132,9 @@ const dataMapper = {
     },
 
 // fonction générique qui permet de mettre à jour une donnée par son id en bdd
-    async updateById (table, column, value) {
+    async updateById (table, column, value, id) {
         let response;
-        const sqlQuery = `UPDATE ${table} SET ${column} = ${value}` ;
+        const sqlQuery = `UPDATE ${table} SET ${column} = ${value} WHERE id = ${id}` ;
 
         try {
             response = await client.query(sqlQuery);
