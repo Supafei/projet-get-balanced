@@ -135,9 +135,9 @@ const dataMapper = {
     async updateById (table, column, value, id) {
         let response;
         const sqlQuery = `UPDATE ${table} SET ${column} = ${value} WHERE id = ${id}` ;
-
+let values = [value];
         try {
-            response = await client.query(sqlQuery);
+            response = await client.query(sqlQuery, values);
 
         } catch (error) {
             console.error(505);
