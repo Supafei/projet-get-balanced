@@ -115,7 +115,6 @@ const dataMapper = {
         }
         return response.rows[0];
     },
-
     async getByCondition(table, column, value) {
         let response;
        
@@ -130,7 +129,6 @@ const dataMapper = {
         return response.rows[0];
 
     },
-
 // fonction générique qui permet de mettre à jour une donnée par son id en bdd
     async updateById (table, column, value, id) {
         let response;
