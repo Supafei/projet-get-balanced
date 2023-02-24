@@ -13,19 +13,19 @@ const router = express.Router();
 
 
 /** ROUTES USER  */
-router.get("/user/:id", isLogged, userController.getUser); // récupère le profil d'un user
+router.get("/user/:id", userController.getUser); // récupère le profil d'un user
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
-router.get("user/logout", isLogged, userController.logOut); // route pour déconnecter l'utilisateur
+router.get("user/logout", userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user/", userController.addUser); // Ajoute un utilisateur en bdd
-router.put("/user/:id", isLogged, userController.updateUser); // modifier un utilisateur en bdd
-router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un utilisateur
+router.put("/user/:id", userController.updateUser); // modifier un utilisateur en bdd
+router.delete("/user/:id", userController.deleteUser); //supprime un utilisateur
 
 /** ROUTES PLANNER */
-router.get("/planner/user/:id", isLogged, plannerController.getUserPlanners); // récupère tous les tableaux d'un user
-router.get ("/planner/:id", isLogged, plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
-router.put("/planner/:id", isLogged, plannerController.updatePlanner); // modifie un tableau
-router.post("/planner/:id", isLogged, plannerController.createPlanner);// ajoute un tableau
-router.delete("/planner/:id", isLogged, plannerController.deletePlanner); // supprime un tableau
+router.get("/planner/user/:id", plannerController.getUserPlanners); // récupère tous les tableaux d'un user
+router.get ("/planner/:id", plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
+router.put("/planner/:id", plannerController.updatePlanner); // modifie un tableau
+router.post("/planner/:id", plannerController.createPlanner);// ajoute un tableau
+router.delete("/planner/:id", plannerController.deletePlanner); // supprime un tableau
 
 /** ROUTES TASK */
 router.get("/task/planner/:id/user/:id", taskController.getUserTasks); // récupère les tâches d'un user dans un tableau
