@@ -1,12 +1,14 @@
-const { response } = require('express');
+const {
+    response
+} = require('express');
 const client = require('./dbClient');
 
 const dataMapper = {
     // fonction générique qui permet de récupérer toutes les colonnes d'une table 
-    async getAll(table){
+    async getAll(table) {
         let response;
-        const sqlQuery = `SELECT * FROM ${table}`; 
-        console.log(sqlQuery); 
+        const sqlQuery = `SELECT * FROM ${table}`;
+        console.log(sqlQuery);
 
         try {
             response = await client.query(sqlQuery);
@@ -16,10 +18,10 @@ const dataMapper = {
             console.log(error);
         }
 
-        return response.rows; 
+        return response.rows;
 
     },
-//fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
+    //fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
     async getOneById(table, id) {
         let response;
         const sqlQuery = ` SELECT * FROM ${table} WHERE id = ${id}`
@@ -34,8 +36,8 @@ const dataMapper = {
         }
         return response.rows[0];
     },
-// fonction générique qui permet d'ajouter une donnée en bdd
-    async insertOne (body, table) {
+    // fonction générique qui permet d'ajouter une donnée en bdd
+    async insertOne(body, table) {
         let response;
         try {
 
@@ -86,40 +88,40 @@ const dataMapper = {
 
 
 
-            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters}) RETURN *;`;
+            const sqlQuery = `INSERT INTO ${table} (${allKeys}) VALUES (${allParameters}) RETURNING *;`;
             // pas besoin de join les inputs, déjà le bon format (array)
             const values = inputs;
 
 
             response = await client.query(sqlQuery, values);
-            console.log("response",response);
 
 
-        } catch (error) {
-            console.log(error);
-        }
-        return response;
-    },
-// fonction générique qui permet de supprimer une donnée en bdd
-    async deleteOne(table, id) {
-        let response;
-        const sqlQuery = ` DELETE * FROM ${table} WHERE id = ${id}`
-        console.log(sqlQuery);
 
-        try {
-            response = await client.query(sqlQuery);
-
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
         return response.rows[0];
     },
+    // fonction générique qui permet de supprimer une donnée en bdd
+    async deleteOne(table, id) {
+        let response;
+        const sqlQuery = ` DELETE FROM ${table} WHERE id = ${id}`
+        console.log(sqlQuery);
 
+        try {
+            response = await client.query(sqlQuery);
+
+            
+        } catch (error) {
+            console.log(error);
+        }
+        return response;
+    },
     async getByCondition(table, column, value) {
         let response;
-        const sqlQuery = `SELECT * FROM ${table} where ${column} = ${value}`;
 
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;
+        console.log(sqlQuery);
         try {
             response = await client.query(sqlQuery);
 
@@ -131,12 +133,13 @@ const dataMapper = {
     },
 
 // fonction générique qui permet de mettre à jour une donnée par son id en bdd
-    async updateById (table, column, value) {
+    async updateById (table, column, value, id) {
         let response;
-        const sqlQuery = `UPDATE ${table} SET ${column} = ${value}` ;
-
+        const sqlQuery = `UPDATE ${table} SET ${column} WHERE id = ${id} RETURNING *;`;
+        let values = value;
         try {
-            response = await client.query(sqlQuery);
+            console.log(sqlQuery);
+            response = await client.query(sqlQuery, values);
 
         } catch (error) {
             console.error(505);
