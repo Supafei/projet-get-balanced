@@ -132,7 +132,11 @@ const userController = {
         // 1. Je veux identifier le nom de la colonne à modifier
 
         let updatedUserData = request.body;
-        let clearPassword = request.body.password;
+
+        let clearPassword;
+        if (request.body.password) {
+            clearPassword = request.body.password;
+        }
 
         const encryptedPassword = await bcrypt.hash(clearPassword, 10);
 
@@ -140,8 +144,6 @@ const userController = {
 
         // Je veux identifier l'id de l'user à mettre à jour
         let updateUserId = request.params.id;
-
-
 
         const bodyKeys = [];
         const bodyValues = [];
@@ -163,13 +165,15 @@ const userController = {
 
         return response.json(updateUser);
     },
+
+    
     //supprime un utilisateur
     async deleteUser(request, response) {
-            let userId = request.params.id;
-            let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
-           
+        let userId = request.params.id;
+        let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
+
         console.log(`nombre de ligne supprimée: ${deleteUser.rowCount}`);
-        return response.json(deleteUser); 
+        return response.json(deleteUser);
     }
 
 }
