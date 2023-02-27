@@ -15,10 +15,8 @@ const userController = {
     },
     // route pour logguer un utilisateur
     async loginUser(request, response) {
-
         // ici on a accès aux informations rentrées par l'utilisateur dans le formulaire
         // console.log(request.body);
-
         // Récupérer les infos du form
         let {
             email,
@@ -28,8 +26,6 @@ const userController = {
         // On vérifie que cet utilisateur existe dans la db avec cet email 
         let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
         // console.log("avant la condition userFound", userFound);
-
-
 
         if (!userFound) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
@@ -50,6 +46,7 @@ const userController = {
             });
         }
 
+        // const acessToken = generateAccessToken(userFound); 
         // si l'email et le hash sont corrects, je connecte l'utilisateur
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
@@ -65,8 +62,6 @@ const userController = {
             delete request.session.user;
         }
     },
-
-
     // Ajoute un utilisateur en bdd
     async addUser(request, response) {
 
@@ -123,7 +118,6 @@ const userController = {
         console.log("addoneuser", addOneUser);
         response.json(addOneUser);
     },
-
     // modifier un utilisateur en bdd
     async updateUser(request, response) {
         // j'ai 3 paramètre a définir:
