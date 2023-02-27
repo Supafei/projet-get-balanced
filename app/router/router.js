@@ -18,7 +18,8 @@ router.post("/user/login", userController.loginUser ); // router pour logguer un
 router.get("user/logout", isLogged, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
 router.put("/user/:id", isLogged, userController.updateUser); // modifier un utilisateur en bdd
-router.delete("/user/:id", userController.deleteUser ); //supprime un utilisateur
+router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un utilisateur
+
 
 /** ROUTES PLANNER */
 router.get("/planner/user/:id", isLogged, plannerController.getUserPlanners); // récupère tous les tableaux d'un user

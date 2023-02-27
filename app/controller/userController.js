@@ -1,6 +1,7 @@
 const dataMapper = require('../datamapper');
 const emailValidator = require('email-validator'); // validation des email
 const bcrypt = require('bcrypt'); // hash des mots de passe
+const { response } = require('express');
 
 const userController = {
 
@@ -123,35 +124,35 @@ const userController = {
         response.json(addOneUser);
     },
 
-
-
     // modifier un utilisateur en bdd
-    async updateUser() {
+    async updateUser(request, response) {
         // j'ai 3 paramètre a définir:
         // 1. Je veux identifier le nom de la colonne à modifier
-        let {
-            firstname,
-            lastname,
-            email,
-            avatar,
-            password,
-            birthdate,
-            color
-        } = request.body;
 
-        // je récupère les clés et les valeurs séparément
-        let valuesBody = Object.values(updatedDataUser);
-        let keysBody = Object.keys(updatedDataUser);
+        let updatedUserData = request.body;
 
         // Je veux identifier l'id de l'user à mettre à jour
-        let UpdateUserId = request.params.id;
+        let updateUserId = request.params.id;
 
-        
-        let updateUser = await dataMapper.updateById("\"user\"", columns, values, UpdateUserId);
-        switch (updateUser) {
-            
+        const bodyKeys = [];
+        const bodyValues = [];
+
+        let counter = 1;
+
+        // pour chaque clé dans le body
+        for (const key in updatedUserData) {
+            bodyKeys.push(`${key}=$${counter}`);
+            counter++;
+            bodyValues.push(updatedUserData[key]);
         }
 
+        console.log(bodyValues);
+
+        let paramsQuery = bodyKeys.join(",");
+
+        let updateUser = await dataMapper.updateById("\"user\"", paramsQuery, bodyValues, updateUserId);
+
+        return response.json(updateUser);
     },
     //supprime un utilisateur
     async deleteUser(request, response) {
@@ -163,5 +164,7 @@ const userController = {
     }
 
 }
+
+
 
 module.exports = userController;
