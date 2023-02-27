@@ -2,7 +2,7 @@ const dataMapper = require('../datamapper');
 
 const categoryController = {
 // récupère toutes les catégories
-    async getAllCategories (_,response) {
+    async getAllCategories (request,response) {
         
          let getCategories = await dataMapper.getAll("category");
          console.log(getCategories);

@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const session = require('express-session');
+// const session = require('express-session');
 const multer = require('multer');
+const jwt = require('jsonwebtoken')
 
 // le package cors permet de spécifier la politique de cors
 const cors = require('cors');
@@ -25,11 +26,9 @@ app.use(mutipartParser.none());
 const router = require("./app/router/router");
 
 
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false
-}));
+// function generateAccessToken(user) {
+//   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
+// }
 
 app.use(middlewareSession.isAuthentified);
 
