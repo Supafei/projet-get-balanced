@@ -105,19 +105,18 @@ const dataMapper = {
     // fonction générique qui permet de supprimer une donnée en bdd
     async deleteOne(table, id) {
         let response;
-        const sqlQuery = ` DELETE * FROM ${table} WHERE id = ${id}`
+        const sqlQuery = ` DELETE FROM ${table} WHERE id = ${id}`
         console.log(sqlQuery);
 
         try {
             response = await client.query(sqlQuery);
 
-            console.log(response);
+            
         } catch (error) {
             console.log(error);
         }
-        return response.rows[0];
+        return response;
     },
-
     async getByCondition(table, column, value) {
         let response;
 
@@ -133,8 +132,8 @@ const dataMapper = {
 
     },
 
-    // fonction générique qui permet de mettre à jour une donnée par son id en bdd
-    async updateById(table, column, value, id) {
+// fonction générique qui permet de mettre à jour une donnée par son id en bdd
+    async updateById (table, column, value, id) {
         let response;
         const sqlQuery = `UPDATE ${table} SET ${column} WHERE id = ${id} RETURNING *;`;
         let values = value;

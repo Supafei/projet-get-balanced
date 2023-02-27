@@ -19,7 +19,7 @@ const userController = {
     async loginUser(request, response) {
 
         // ici on a accès aux informations rentrées par l'utilisateur dans le formulaire
-        console.log(request.body);
+        // console.log(request.body);
 
         // Récupérer les infos du form
         let {
@@ -29,7 +29,7 @@ const userController = {
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
         let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
-        console.log("avant la condition userFound", userFound);
+        // console.log("avant la condition userFound", userFound);
 
 
 
@@ -56,7 +56,7 @@ const userController = {
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
         request.session.user = userFound;
-        console.log(request.session.user);
+        // console.log(request.session.user);
 
         return response.json(userFound);
     },
@@ -126,12 +126,11 @@ const userController = {
         response.json(addOneUser);
     },
 
-
-
     // modifier un utilisateur en bdd
     async updateUser(request, response) {
         // j'ai 3 paramètre a définir:
         // 1. Je veux identifier le nom de la colonne à modifier
+
         let updatedUserData = request.body;
         let clearPassword = request.body.password;
 
@@ -164,12 +163,14 @@ const userController = {
 
         return response.json(updateUser);
     },
-
-    async deleteUser() {}
-
-
-
-
+    //supprime un utilisateur
+    async deleteUser(request, response) {
+            let userId = request.params.id;
+            let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
+           
+        console.log(`nombre de ligne supprimée: ${deleteUser.rowCount}`);
+        return response.json(deleteUser); 
+    }
 
 }
 
