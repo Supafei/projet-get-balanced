@@ -1,7 +1,9 @@
 const dataMapper = require('../datamapper');
 const emailValidator = require('email-validator'); // validation des email
 const bcrypt = require('bcrypt'); // hash des mots de passe
-const { response } = require('express');
+const {
+    response
+} = require('express');
 
 const userController = {
 
@@ -131,9 +133,16 @@ const userController = {
         // j'ai 3 paramètre a définir:
         // 1. Je veux identifier le nom de la colonne à modifier
         let updatedUserData = request.body;
+        let clearPassword = request.body.password;
+
+        const encryptedPassword = await bcrypt.hash(clearPassword, 10);
+
+        request.body.password = encryptedPassword;
 
         // Je veux identifier l'id de l'user à mettre à jour
         let updateUserId = request.params.id;
+
+
 
         const bodyKeys = [];
         const bodyValues = [];
@@ -156,7 +165,7 @@ const userController = {
         return response.json(updateUser);
     },
 
-    async deleteUser () {}
+    async deleteUser() {}
 
 
 
