@@ -5,20 +5,21 @@ const taskController = require("../controller/taskController");
 const userController = require ("../controller/userController");
 
 // middlewares
-const {isLogged} = require("../middleware/middlewareLogin");
-const isAuthentified = require("../middleware/middlewareSession");
+const {isLogged, checkToken} = require("../middleware/middlewareLogin");
+
 
 
 const router = express.Router();
 
 
 /** ROUTES USER  */
-router.get("/user/:id", isLogged, userController.getUser); // récupère le profil d'un user
+
+router.get("/user/:id", isLogged, checkToken, userController.getUser); // récupère le profil d'un user
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
-router.get("user/logout", isLogged, userController.logOut); // route pour déconnecter l'utilisateur
+router.get("user/logout", isLogged, checkToken, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
-router.put("/user/:id", isLogged, userController.updateUser); // modifier un utilisateur en bdd
-router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un utilisateur
+router.put("/user/:id", isLogged, checkToken, userController.updateUser); // modifier un utilisateur en bdd
+router.delete("/user/:id", isLogged, checkToken, userController.deleteUser ); //supprime un utilisateur
 
 
 /** ROUTES PLANNER */
@@ -40,6 +41,8 @@ router.get("/category/:id/planner/:id/task/", categoryController.getCategoryTask
 router.post("/category/", categoryController.createCategory); //créer une catégorie
 router.delete("/category/:id", categoryController.deleteCategory); //supprimer une catégorie
 router.put("/category/:id", categoryController.updateCategory); //modifier une catégorie
+
+router.get("/", isLogged);
 
 
 module.exports = router;
