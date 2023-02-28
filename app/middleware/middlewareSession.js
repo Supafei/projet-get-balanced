@@ -1,6 +1,8 @@
 const middlewareSession = {
 
     isAuthentified (request, response, next) {
+        console.log(request.session);
+
         if (request.session.user) {
             // on a la propriété user dans la session, c'est donc qu'un user est connecté
             response.locals.user = request.session.user

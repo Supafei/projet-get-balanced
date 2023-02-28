@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-// const session = require('express-session');
+const session = require('express-session');
 const multer = require('multer');
 const jwt = require('jsonwebtoken')
 
@@ -29,6 +29,17 @@ const router = require("./app/router/router");
 // function generateAccessToken(user) {
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
 // }
+
+
+app.use(session({
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    maxAge: (1000*60*60), // ça fait une heure
+  }
+}))
 
 app.use(middlewareSession.isAuthentified);
 
