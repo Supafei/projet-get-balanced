@@ -33,13 +33,13 @@ router.get("/task/planner/:id/user/:id", taskController.getUserTasks); // récup
 router.post("/task/planner/post", taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
 router.put("/task/:id/planner/:id", taskController.updateTask); // modifie une tâche dans un tableau
 router.delete("/task/:id/planner/:id", taskController.deleteTask); // supprime une tâche dans un tableau
+router.get("/category/:id/planner/:id/task/", plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
 
 /** ROUTES CATEGORIES */
 router.get("/category/", categoryController.getAllCategories); // récupère toutes les catégories
-router.get("/category/:id/planner/:id/task/", categoryController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
-router.post("/category/", categoryController.createCategory); //créer une catégorie
-router.delete("/category/:id", categoryController.deleteCategory); //supprimer une catégorie
-router.put("/category/:id", categoryController.updateCategory); //modifier une catégorie
+// router.post("/category/", categoryController.createCategory); //créer une catégorie
+// router.delete("/category/:id", categoryController.deleteCategory); //supprimer une catégorie
+// router.put("/category/:id", categoryController.updateCategory); //modifier une catégorie
 
 
 module.exports = router;

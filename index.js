@@ -30,7 +30,6 @@ const router = require("./app/router/router");
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
 // }
 
-
 app.use(session({
   secret: process.env.SECRET_SESSION,
   resave: true,
@@ -42,7 +41,6 @@ app.use(session({
 }))
 
 app.use(middlewareSession.isAuthentified);
-
 app.use(router);
 
 app.listen(PORT, () => {

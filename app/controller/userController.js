@@ -1,7 +1,9 @@
 const dataMapper = require('../datamapper');
 const emailValidator = require('email-validator'); // validation des email
 const bcrypt = require('bcrypt'); // hash des mots de passe
-const { response } = require('express');
+const {
+    response
+} = require('express');
 
 const userController = {
 
@@ -127,6 +129,15 @@ const userController = {
 
         let updatedUserData = request.body;
 
+        let clearPassword;
+        if (request.body.password) {
+            clearPassword = request.body.password;
+        }
+
+        const encryptedPassword = await bcrypt.hash(clearPassword, 10);
+
+        request.body.password = encryptedPassword;
+
         // Je veux identifier l'id de l'user à mettre à jour
         let updateUserId = request.params.id;
 
@@ -150,13 +161,15 @@ const userController = {
 
         return response.json(updateUser);
     },
+
+    
     //supprime un utilisateur
     async deleteUser(request, response) {
-            let userId = request.params.id;
-            let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
-           
+        let userId = request.params.id;
+        let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
+
         console.log(`nombre de ligne supprimée: ${deleteUser.rowCount}`);
-        return response.json(deleteUser); 
+        return response.json(deleteUser);
     }
 
 }
