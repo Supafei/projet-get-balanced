@@ -27,7 +27,7 @@ const userController = {
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
         let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
-        // console.log("avant la condition userFound", userFound);
+        console.log("avant la condition userFound", userFound);
 
         if (!userFound) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
@@ -43,6 +43,7 @@ const userController = {
         const validPassword = await bcrypt.compare(password, userFound.password);
 
         if (!validPassword) {
+            console.log("Mot de passe incorrect");
             return response.status("401").json({
                 message: 'Incorrect password'
             });
@@ -53,7 +54,7 @@ const userController = {
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
         request.session.user = userFound;
-        // console.log(request.session.user);
+        console.log("log de l'user",request.session.user);
 
         return response.json(userFound);
     },
@@ -117,7 +118,8 @@ const userController = {
             password: encryptedPassword
         }, "\"user\"");
 
-        console.log("addoneuser", addOneUser);
+        request.session.user = addOneUser;
+        console.log("request.session.user",request.session.user);
         response.json(addOneUser);
     },
     // modifier un utilisateur en bdd

@@ -7,7 +7,10 @@ const middlewareLogin = {
     }
 
     next();
-  },
+
+  }
+  
+ },
   // authenticateToken(req, res, next) {
   //   const authHeader = req.headers['authorization']
   //   const token = authHeader && authHeader.split(' ')[1]
@@ -23,6 +26,7 @@ const middlewareLogin = {
   //   });
 
   // }
+
 }
 
 module.exports = middlewareLogin;
