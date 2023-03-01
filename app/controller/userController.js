@@ -72,13 +72,25 @@ const userController = {
             // });
         }
 
+        // On crée le refresh token et on le stocke en BDD 
+        // const refreshToken = crypto.randomBytes(128).toString('base64');
+
+        // await RefreshToken.create({
+        //     userId: user.id,
+        //     token: refreshToken,
+        //     expiresAt: Date.now() + config.refreshToken.expiresIn
+        // });
+
         // si l'email et le hash sont corrects, je connecte l'utilisateur
         console.log("request.session", request.session);
         request.session.user = userFound;
         console.log("log de l'user", request.session.user);
-        
 
-        return response.json({token, userFound});
+
+        return response.json({
+            token,
+            userFound
+        });
     },
 
     logOut(request, response) {
