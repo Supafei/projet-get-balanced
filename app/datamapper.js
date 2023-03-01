@@ -128,7 +128,7 @@ const dataMapper = {
         } catch (error) {
             console.log(error);
         }
-        return response.rows;
+        return response.rows[0];
 
     },
     // fonction générique qui permet de mettre à jour une donnée par son id en bdd

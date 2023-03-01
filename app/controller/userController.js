@@ -1,9 +1,11 @@
 const dataMapper = require('../datamapper');
 const emailValidator = require('email-validator'); // validation des email
 const bcrypt = require('bcrypt'); // hash des mots de passe
+const jwt = require("jsonwebtoken");
 const {
     response
 } = require('express');
+
 
 const userController = {
 
@@ -109,7 +111,7 @@ const userController = {
         } = request.body;
 
         console.log("body", firstname, lastname, email, password, confirmPassword);
-        // console.log(request.body);
+        console.log(request.body);
         let addOneUser;
 
 
@@ -150,8 +152,8 @@ const userController = {
         }, "\"user\"");
 
 
-        token = jwt.sign({
-            email: userFound.email
+        let token = jwt.sign({
+            email: email
         }, process.env.SECRET_SESSION);
 
         console.log("TOKEN : ", token);
