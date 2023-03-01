@@ -75,6 +75,8 @@ const userController = {
         // On crée le refresh token et on le stocke en BDD 
         // const refreshToken = crypto.randomBytes(128).toString('base64');
 
+        // Mettre le token dans la table user
+
         // await RefreshToken.create({
         //     userId: user.id,
         //     token: refreshToken,
@@ -96,6 +98,7 @@ const userController = {
     logOut(request, response) {
 
         if (request.session.user) {
+            delete 
             delete request.session.user;
         }
     },
@@ -152,9 +155,16 @@ const userController = {
             password: encryptedPassword
         }, "\"user\"");
 
+        token = jwt.sign({
+            email: userFound.email
+        }, process.env.SECRET_SESSION);
+
+        console.log("TOKEN : ", token);
+
         request.session.user = addOneUser;
         console.log("request.session.user", request.session.user);
-        response.json(addOneUser);
+        
+        response.json({addOneUser, token});
     },
     // modifier un utilisateur en bdd
     async updateUser(request, response) {
