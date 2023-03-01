@@ -23,9 +23,9 @@ router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un 
 
 /** ROUTES PLANNER */
 router.get("/planner/user/:id", isLogged, plannerController.getUserPlanners); // récupère tous les tableaux d'un user
-router.get ("/planner/:id", isLogged, plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
+router.get ("/planner/:id", /*isLogged,*/ plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
 router.put("/planner/:id", isLogged, plannerController.updatePlanner); // modifie un tableau
-router.post("/planner/:id", isLogged, plannerController.createPlanner);// ajoute un tableau
+router.post("/planner/user/:id", /*isLogged,*/ plannerController.createPlanner);// ajoute un tableau
 router.delete("/planner/:id", isLogged, plannerController.deletePlanner); // supprime un tableau
 
 /** ROUTES TASK */
