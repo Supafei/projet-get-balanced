@@ -1,6 +1,7 @@
 const dataMapper = require('../datamapper');
 const bcrypt = require('bcrypt'); // hash des mots de passe
 const jwt = require('jsonwebtoken');
+
 const {
     response
 } = require('express');
@@ -163,6 +164,15 @@ const userController = {
 
         let updatedUserData = request.body;
 
+        let clearPassword;
+        if (request.body.password) {
+            clearPassword = request.body.password;
+        }
+
+        const encryptedPassword = await bcrypt.hash(clearPassword, 10);
+
+        request.body.password = encryptedPassword;
+
         // Je veux identifier l'id de l'user à mettre à jour
         let updateUserId = request.params.id;
 
@@ -186,6 +196,8 @@ const userController = {
 
         return response.json(updateUser);
     },
+
+    
     //supprime un utilisateur
     async deleteUser(request, response) {
         let userId = request.params.id;

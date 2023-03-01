@@ -25,7 +25,6 @@ app.use(mutipartParser.none());
 const router = require("./app/router/router");
 
 
-
 app.use(session({
   secret: process.env.SECRET_SESSION,
   resave: true,

@@ -15,6 +15,7 @@ const middlewareLogin = {
     }
     response.json(request.session);
     next();
+
   },
 
 
