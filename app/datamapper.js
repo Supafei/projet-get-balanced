@@ -41,7 +41,7 @@ const dataMapper = {
         let response;
         try {
 
-            console.log(body);
+            console.log("body dans datamapper", body);
 
             // je récupère les différentes clés de mon objet body :
             // ce qui est envoyé via le formulaire
@@ -111,11 +111,11 @@ const dataMapper = {
         try {
             response = await client.query(sqlQuery);
 
-            
+
         } catch (error) {
             console.log(error);
         }
-        return response;
+        return response.command;
     },
     async getByCondition(table, column, value) {
         let response;
@@ -128,11 +128,11 @@ const dataMapper = {
         } catch (error) {
             console.log(error);
         }
-        return response.rows[0];
+        return response.rows;
 
     },
-// fonction générique qui permet de mettre à jour une donnée par son id en bdd
-    async updateById (table, column, value, id) {
+    // fonction générique qui permet de mettre à jour une donnée par son id en bdd
+    async updateById(table, column, value, id) {
         let response;
         const sqlQuery = `UPDATE ${table} SET ${column} WHERE id = ${id} RETURNING *;`;
         let values = value;
@@ -144,8 +144,8 @@ const dataMapper = {
             console.error(505);
         }
         return response.rows[0];
-    }
-
+    },
+    
 };
 
 module.exports = dataMapper;

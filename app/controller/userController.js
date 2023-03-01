@@ -180,7 +180,7 @@ const userController = {
         const bodyValues = [];
 
         let counter = 1;
-
+é
         // pour chaque clé dans le body
         for (const key in updatedUserData) {
             bodyKeys.push(`${key}=$${counter}`);
