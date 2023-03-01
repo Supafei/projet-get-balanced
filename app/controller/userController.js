@@ -1,7 +1,6 @@
 const dataMapper = require('../datamapper');
+const emailValidator = require('email-validator'); // validation des email
 const bcrypt = require('bcrypt'); // hash des mots de passe
-const jwt = require('jsonwebtoken');
-
 const {
     response
 } = require('express');
@@ -13,7 +12,6 @@ const userController = {
 
         let userId = request.params.id;
         let getUser = await dataMapper.getOneById("\"user\"", userId);
-        console.log("request.session", request.session);
         return response.json(getUser);
 
     },
@@ -29,7 +27,7 @@ const userController = {
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
         let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
-
+        // console.log("avant la condition userFound", userFound);
 
         if (!userFound) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
@@ -45,53 +43,19 @@ const userController = {
         const validPassword = await bcrypt.compare(password, userFound.password);
 
         if (!validPassword) {
-            console.log("Mot de passe incorrect");
             return response.status("401").json({
                 message: 'Incorrect password'
             });
         }
 
-
-
-
-        // on appelle la méthode qui va vérifier les infos en BDD et rempli les informations de notre user
-        // la méthode renvoie true ou false suivant si les informations username/password sont correctes
-        let token;
-        if (userFound) {
-
-
-            // Génération du token
-            token = jwt.sign({
-                email: userFound.email
-            }, process.env.SECRET_SESSION);
-
-            console.log("TOKEN : ", token);
-
-            // // on envoie le token généré au client
-            // response.json({
-            //     token
-            // });
-        }
-
-        // On crée le refresh token et on le stocke en BDD 
-        // const refreshToken = crypto.randomBytes(128).toString('base64');
-
-        // await RefreshToken.create({
-        //     userId: user.id,
-        //     token: refreshToken,
-        //     expiresAt: Date.now() + config.refreshToken.expiresIn
-        // });
-
+        // const acessToken = generateAccessToken(userFound); 
         // si l'email et le hash sont corrects, je connecte l'utilisateur
-        console.log("request.session", request.session);
+        // coté serveur, cette connexion se matérialise par la présence d'une propriété user
+        // dans la session de ce client...
         request.session.user = userFound;
-        console.log("log de l'user", request.session.user);
+        // console.log(request.session.user);
 
-
-        return response.json({
-            token,
-            userFound
-        });
+        return response.json(userFound);
     },
 
     logOut(request, response) {
@@ -113,7 +77,7 @@ const userController = {
         } = request.body;
 
         console.log("body", firstname, lastname, email, password, confirmPassword);
-
+        // console.log(request.body);
         let addOneUser;
 
 
@@ -126,7 +90,7 @@ const userController = {
         }
         // je vérifie qu'il ny' a pas déjà cet email en BDD
         let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", email);
-
+        console.log("sql request", userWithSameEmail);
         if (userWithSameEmail) {
             let errorMessage = 'Cet email est déjà utilisé.';
             return response.json({
@@ -153,8 +117,7 @@ const userController = {
             password: encryptedPassword
         }, "\"user\"");
 
-        request.session.user = addOneUser;
-        console.log("request.session.user", request.session.user);
+        // console.log("addoneuser", addOneUser);
         response.json(addOneUser);
     },
     // modifier un utilisateur en bdd
@@ -197,7 +160,6 @@ const userController = {
         return response.json(updateUser);
     },
 
-    
     //supprime un utilisateur
     async deleteUser(request, response) {
         let userId = request.params.id;
