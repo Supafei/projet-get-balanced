@@ -1,31 +1,42 @@
+const jwt = require("jsonwebtoken");
+
 const middlewareLogin = {
   // vérifie qu'un client est bien connecté
   // sinon redirige vers la page de connexion
   isLogged(request, response, next) {
-    if (!request.session.user) {
-      return response.status("401").json({ message: 'Not logged' });
-    }
 
+    console.log(request.session);
+
+    if (!request.session.user) {
+      return response.status("401").json({
+        message: 'Not logged'
+      });
+
+    }
+    response.json(request.session);
     next();
 
+  },
+
+
+  checkToken(request, response, next) {
+    try {
+      console.log(req.headers.authorization.split(" ")[1]);
+
+      // on vérifie qu'il y a le token dans le headers authorization
+      const token = request.headers.authorization.split(" ")[1];
+
+      // on décode le token 
+      const user = jwt.verify(token, process.env.SECRET_SESSION);
+      console.log("token validé !", user);
+
+      next();
+
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
-  
- },
-  // authenticateToken(req, res, next) {
-  //   const authHeader = req.headers['authorization']
-  //   const token = authHeader && authHeader.split(' ')[1]
-
-  //   if (token == null) return res.sendStatus(401)
-
-  //   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-  //     if (err) {
-  //       return res.sendStatus(401)
-  //     }
-  //     req.user = user;
-  //     next();
-  //   });
-
-  // }
 
 }
 
