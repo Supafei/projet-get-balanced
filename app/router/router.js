@@ -17,7 +17,7 @@ router.get("/user/:id", isLogged, userController.getUser); // récupère le prof
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
 router.get("user/logout", isLogged, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
-router.put("/user/:id", isLogged, userController.updateUser); // modifier un utilisateur en bdd
+router.patch("/user/:id", isLogged, userController.updateUser); // modifier un utilisateur en bdd
 router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un utilisateur
 
 
@@ -29,10 +29,10 @@ router.post("/planner/:id", isLogged, plannerController.createPlanner);// ajoute
 router.delete("/planner/:id", isLogged, plannerController.deletePlanner); // supprime un tableau
 
 /** ROUTES TASK */
-router.get("/task/planner/:id/user/:id", taskController.getUserTasks); // récupère les tâches d'un user dans un tableau
-router.post("/task/planner/post", taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
-router.put("/task/:id/planner/:id", taskController.updateTask); // modifie une tâche dans un tableau
-router.delete("/task/:id/planner/:id", taskController.deleteTask); // supprime une tâche dans un tableau
+router.get("/task/planner/:id", taskController.getPlannerTasks); // récupère les tâches d'un user dans un tableau
+router.post("/task/planner/:id", taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
+router.put("/task/:idTask/planner/:idPlanner", taskController.updateTask); // modifie une tâche dans un tableau
+router.delete("/task/:id", taskController.deleteTask); // supprime une tâche dans un tableau
 router.get("/category/:id/planner/:id/task/", plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
 
 /** ROUTES CATEGORIES */
