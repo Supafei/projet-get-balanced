@@ -83,17 +83,17 @@ const plannerController = {
 
     },
     // supprime un tableau
-    async deletePlanner() {
+    async deletePlanner(_, response) {
 
         let plannerId = request.params.id;
         let deletePlanner = await dataMapper.deleteOne("planner", plannerId);
 
         console.log(`nombre de ligne supprimée: ${deletePlanner.rowCount}`);
         return response.json(deletePlanner);
-
     },
+    // récupère les tâches d’une catégorie d'un planner
     async getCategoryTasks() {
-
+     let 
     }
 
 }

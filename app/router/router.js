@@ -23,9 +23,9 @@ router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un 
 
 /** ROUTES PLANNER */
 router.get("/planner/user/:id", isLogged, plannerController.getUserPlanners); // récupère tous les tableaux d'un user
-router.get ("/planner/:id", /*isLogged,*/ plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
+router.get ("/planner/:id", isLogged, plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
 router.put("/planner/:id", isLogged, plannerController.updatePlanner); // modifie un tableau
-router.post("/planner/user/:id", /*isLogged,*/ plannerController.createPlanner);// ajoute un tableau
+router.post("/planner/user/:id", isLogged, plannerController.createPlanner);// ajoute un tableau
 router.delete("/planner/:id", isLogged, plannerController.deletePlanner); // supprime un tableau
 
 /** ROUTES TASK */
@@ -33,7 +33,7 @@ router.get("/task/planner/:id", taskController.getPlannerTasks); // récupère l
 router.post("/task/planner/:id", taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
 router.put("/task/:idTask/planner/:idPlanner", taskController.updateTask); // modifie une tâche dans un tableau
 router.delete("/task/:id", taskController.deleteTask); // supprime une tâche dans un tableau
-router.get("/category/:id/planner/:id/task/", plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
+router.get("/category/:idCat/planner/:idPlan/task/", plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
 
 /** ROUTES CATEGORIES */
 router.get("/category/", categoryController.getAllCategories); // récupère toutes les catégories
