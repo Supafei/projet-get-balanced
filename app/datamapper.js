@@ -131,6 +131,23 @@ const dataMapper = {
         return response.rows[0];
 
     },
+
+    async getBy2Conditions (table, cond1, cond2, values){
+        let response;
+
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${cond1} AND ${cond2};`;
+        let receivedValues = values;
+        console.log(sqlQuery, receivedValues);
+        try {
+            response = await client.query(sqlQuery);
+
+        } catch (error) {
+            console.log(error);
+        }
+        return response.rows[0];
+    },
+
+
     // fonction générique qui permet de mettre à jour une donnée par son id en bdd
     async updateById(table, column, value, id) {
         let response;

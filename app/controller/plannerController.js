@@ -92,8 +92,18 @@ const plannerController = {
         return response.json(deletePlanner);
     },
     // récupère les tâches d’une catégorie d'un planner
-    async getCategoryTasks() {
-     let 
+    async getCategoryTasks(request, response) {
+     let categoryId = request.params.idCat;
+     let plannerId = request.params.idPlan;
+
+     let conditionCategory = `category_id = $1`
+     let conditionPlanner = `planner_id = $2`
+     let values = [categoryId, plannerId]
+
+     let getTaskByCatOnPlanner = await dataMapper.getBy2Conditions("task", conditionCategory, conditionPlanner, values );
+
+     return response.json(getTaskByCatOnPlanner);
+
     }
 
 }
