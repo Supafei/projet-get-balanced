@@ -48,7 +48,38 @@ const userController = {
             });
         }
 
-        // const acessToken = generateAccessToken(userFound); 
+
+        // on appelle la méthode qui va vérifier les infos en BDD et rempli les informations de notre user
+        // la méthode renvoie true ou false suivant si les informations username/password sont correctes
+        let token;
+        if (userFound) {
+
+
+            // Génération du token
+            token = jwt.sign({
+                email: userFound.email
+            }, process.env.SECRET_SESSION);
+
+            console.log("TOKEN : ", token);
+
+            // // on envoie le token généré au client
+            // response.json({
+            //     token
+            // });
+        }
+
+        // On crée le refresh token et on le stocke en BDD 
+        // const refreshToken = crypto.randomBytes(128).toString('base64');
+
+        // Mettre le token dans la table user
+
+        // await RefreshToken.create({
+        //     userId: user.id,
+        //     token: refreshToken,
+        //     expiresAt: Date.now() + config.refreshToken.expiresIn
+        // });
+
+
         // si l'email et le hash sont corrects, je connecte l'utilisateur
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
@@ -61,6 +92,7 @@ const userController = {
     logOut(request, response) {
 
         if (request.session.user) {
+            delete 
             delete request.session.user;
         }
     },
@@ -117,8 +149,18 @@ const userController = {
             password: encryptedPassword
         }, "\"user\"");
 
-        // console.log("addoneuser", addOneUser);
-        response.json(addOneUser);
+
+        token = jwt.sign({
+            email: userFound.email
+        }, process.env.SECRET_SESSION);
+
+        console.log("TOKEN : ", token);
+
+        request.session.user = addOneUser;
+        console.log("request.session.user", request.session.user);
+        
+        response.json({addOneUser, token});
+
     },
     // modifier un utilisateur en bdd
     async updateUser(request, response) {

@@ -21,6 +21,7 @@ router.patch("/user/:id", isLogged, userController.updateUser); // modifier un u
 router.delete("/user/:id", isLogged, userController.deleteUser ); //supprime un utilisateur
 
 
+
 /** ROUTES PLANNER */
 router.get("/planner/user/:id", isLogged, plannerController.getUserPlanners); // récupère tous les tableaux d'un user
 router.get ("/planner/:id", isLogged, plannerController.getPlanner) ;//récupère un tableau via son id avec ses données liées 
