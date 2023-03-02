@@ -245,7 +245,7 @@ const userController = {
                 const user = jwt.verify(token, process.env.SECRET_SESSION);
                 console.log("user de tokenExpire",user);
 
-                return response.json({success: "Token valide"});
+                return response.json({success: "Token valide", user});
 
             } catch (error) {
                 console.log("message d'erreur de tokenExpire:", error.message);
