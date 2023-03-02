@@ -10,9 +10,9 @@ const client = require('./dbClient');
  * @param {number} id
  * @param {string} body
  * @param {string} column
- * @param {*} cond1
- * @param {*} cond2
- * @param {*} values
+ * @param {string} cond1
+ * @param {string} cond2
+ * @param {array} value
  * 
  */
 
@@ -144,11 +144,11 @@ const dataMapper = {
         return response.rows[0];
 
     },
-    async getBy2Conditions (table, cond1, cond2, values){
+    async getBy2Conditions (table, cond1, cond2, value){
         let response;
 
         const sqlQuery = `SELECT * FROM ${table} WHERE ${cond1} AND ${cond2};`;
-        let receivedValues = values;
+        let receivedValues = value;
         console.log(sqlQuery, receivedValues);
         try {
             response = await client.query(sqlQuery, receivedValues);

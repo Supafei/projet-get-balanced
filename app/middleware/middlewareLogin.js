@@ -6,6 +6,7 @@ const middlewareLogin = {
   isLogged(request, response, next) {
 
     console.log(request.session);
+    console.log(request.session.user);
 
     if (!request.session.user) {
       return response.status("401").json({
