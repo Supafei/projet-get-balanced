@@ -1,5 +1,14 @@
 const dataMapper = require('../datamapper');
 
+
+/**
+ * Représente les méthodes pour gérer les tâches 
+ * @param {*} request
+ * @param {*} response
+ * 
+ */
+
+
 const plannerController = {
     // récupère tous les tableaux d'un user
     async getUserPlanners(_, response) {
@@ -80,6 +89,7 @@ const plannerController = {
     console.log(variableCommeJeveux);
     response.json(addPlanner);
 
+   
 
     },
     // supprime un tableau

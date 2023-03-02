@@ -6,6 +6,12 @@ const {
     response
 } = require('express');
 
+/**
+ * Représente les méthodes pour les routes User
+ * @param {*} request
+ * @param {*} response
+ * 
+ */
 
 const userController = {
 
@@ -94,8 +100,8 @@ const userController = {
     logOut(request, response) {
 
         if (request.session.user) {
-            delete 
-            delete request.session.user;
+            delete
+                delete request.session.user;
         }
     },
     // Ajoute un utilisateur en bdd
@@ -160,8 +166,8 @@ const userController = {
 
         request.session.user = addOneUser;
         console.log("request.session.user", request.session.user);
-        
-        response.json({addOneUser, token});
+
+        response.json({ addOneUser, token });
 
     },
     // modifier un utilisateur en bdd
@@ -187,7 +193,7 @@ const userController = {
         const bodyValues = [];
 
         let counter = 1;
-é
+
         // pour chaque clé dans le body
         for (const key in updatedUserData) {
             bodyKeys.push(`${key}=$${counter}`);
@@ -203,7 +209,6 @@ const userController = {
 
         return response.json(updateUser);
     },
-
     //supprime un utilisateur
     async deleteUser(request, response) {
         let userId = request.params.id;

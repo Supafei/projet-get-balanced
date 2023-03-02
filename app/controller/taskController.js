@@ -1,5 +1,13 @@
 const dataMapper = require('../datamapper');
 
+/**
+ * Représente les méthodes pour gérer les tâches 
+ * @param {*} request
+ * @param {*} response
+ * 
+ */
+
+
 const taskController = {
     // récupère les tâches d'un planner
     async getPlannerTasks(request, response) {

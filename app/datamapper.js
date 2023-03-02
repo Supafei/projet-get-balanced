@@ -3,6 +3,19 @@ const {
 } = require('express');
 const client = require('./dbClient');
 
+
+/**
+ * Datamapper qui envoie les requêtes SQL à la bdd
+ * @param {string} table
+ * @param {number} id
+ * @param {string} body
+ * @param {string} column
+ * @param {*} cond1
+ * @param {*} cond2
+ * @param {*} values
+ * 
+ */
+
 const dataMapper = {
     // fonction générique qui permet de récupérer toutes les colonnes d'une table 
     async getAll(table) {
@@ -131,7 +144,6 @@ const dataMapper = {
         return response.rows[0];
 
     },
-
     async getBy2Conditions (table, cond1, cond2, values){
         let response;
 
@@ -146,8 +158,6 @@ const dataMapper = {
         }
         return response.rows;
     },
-
-
     // fonction générique qui permet de mettre à jour une donnée par son id en bdd
     async updateById(table, column, value, id) {
         let response;
