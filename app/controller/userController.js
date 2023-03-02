@@ -34,21 +34,21 @@ const userController = {
         } = request.body;
 
         // On vérifie que cet utilisateur existe dans la db avec cet email 
-        let userFound = await dataMapper.getByCondition("\"user\"", "email", email);
+        let user = await dataMapper.getByCondition("\"user\"", "email", email);
         // console.log("avant la condition userFound", userFound);
 
-        if (!userFound) {
+        if (!user) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
             return response.status("401").json({
                 errorMessage
             });
         }
 
-        console.log('utilisateur trouvé:', userFound);
+        console.log('utilisateur trouvé:', user);
 
 
         //on vérifie le password
-        const validPassword = await bcrypt.compare(password, userFound.password);
+        const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
             return response.status("401").json({
@@ -60,12 +60,12 @@ const userController = {
         // on appelle la méthode qui va vérifier les infos en BDD et rempli les informations de notre user
         // la méthode renvoie true ou false suivant si les informations username/password sont correctes
         let token;
-        if (userFound) {
+        if (user) {
 
 
             // Génération du token
             token = jwt.sign({
-                email: userFound.email
+                email: user.email
             }, process.env.SECRET_SESSION);
 
             console.log("TOKEN : ", token);
@@ -91,10 +91,10 @@ const userController = {
         // si l'email et le hash sont corrects, je connecte l'utilisateur
         // coté serveur, cette connexion se matérialise par la présence d'une propriété user
         // dans la session de ce client...
-        request.session.user = userFound;
+        request.session.user = user;
         // console.log(request.session.user);
 
-        return response.json(userFound);
+        return response.json(user);
     },
 
     logOut(request, response) {
@@ -118,7 +118,7 @@ const userController = {
 
         console.log("body", firstname, lastname, email, password, confirmPassword);
         console.log(request.body);
-        let addOneUser;
+        let user;
 
 
         // on vérifie que tous les champs obligatoires sont renseignés
@@ -150,7 +150,7 @@ const userController = {
         const encryptedPassword = await bcrypt.hash(password, 10);
 
         // on créé l'user en BDD
-        addOneUser = await dataMapper.insertOne({
+        user = await dataMapper.insertOne({
             firstname,
             lastname,
             email,
@@ -164,10 +164,10 @@ const userController = {
 
         console.log("TOKEN : ", token);
 
-        request.session.user = addOneUser;
+        request.session.user = user;
         console.log("request.session.user", request.session.user);
 
-        response.json({ addOneUser, token });
+        response.json({ user, token });
 
     },
     // modifier un utilisateur en bdd
