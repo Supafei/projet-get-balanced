@@ -15,9 +15,9 @@ const router = express.Router();
 /** ROUTES USER  */
 router.get("/user/:id", isLogged, checkToken, userController.getUser); // récupère le profil d'un user
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
-router.get("user/logout", isLogged, checkToken, userController.logOut); // route pour déconnecter l'utilisateur
+// router.get("user/logout", isLogged, checkToken, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
-router.patch("/user/:id", isLogged, checkToken, userController.updateUser); // modifier un utilisateur en bdd
+router.patch("/user/:id", checkToken, userController.updateUser); // modifier un utilisateur en bdd
 router.delete("/user/:id", isLogged, checkToken, userController.deleteUser ); //supprime un utilisateur
 
 /** ROUTES PLANNER */
@@ -36,6 +36,8 @@ router.get("/category/:idCat/planner/:idPlan/task/", isLogged, checkToken, plann
 
 /** ROUTES CATEGORIES */
 router.get("/category/", isLogged, checkToken, categoryController.getAllCategories); // récupère toutes les catégories
+
+router.get("/token", userController.tokenExpire) // vérifie la validité/expiration du token
 
 
 module.exports = router;
