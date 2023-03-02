@@ -18,6 +18,7 @@ CREATE TABLE
         birthdate TIMESTAMPTZ,
         avatar text,
         password text NOT NULL,
+        token text,
         color text NOT NULL DEFAULT '#b0b',
         created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMPTZ
