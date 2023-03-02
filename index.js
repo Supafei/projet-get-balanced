@@ -6,7 +6,7 @@ const multer = require('multer');
 // le package cors permet de spécifier la politique de cors
 const cors = require('cors');
 const middlewareLogin = require('./app/middleware/middlewareLogin');
-const middlewareSession = require('./app/middleware/middlewareSession')
+const middlewareSession = require('./app/middleware/middlewareSession');
 
 // on ajoute un middleware, ici avec les options par défaut, n'importe quel domaine pourra interroger notre API
 // voir la doc et les options si on veut être plus restrictif

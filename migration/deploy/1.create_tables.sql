@@ -7,6 +7,7 @@ DROP TABLE
     task,
     user_has_planner;
 
+
 -- CREATE DOMAIN email as text CHECK (VALUE ~ '^[a-z0-9][a-z_-!?.+0-9]*[a-z0-9]@[a-z]{1,63}\.[a-z]{2,63}$');
 
 CREATE TABLE
@@ -14,7 +15,7 @@ CREATE TABLE
         id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         firstname text NOT NULL,
         lastname text NOT NULL,
-        email email_address UNIQUE NOT NULL,
+        email text UNIQUE NOT NULL,
         birthdate TIMESTAMPTZ,
         avatar text,
         password text NOT NULL,
