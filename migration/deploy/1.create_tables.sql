@@ -47,7 +47,7 @@ CREATE TABLE
         description text,
         date TIMESTAMPTZ NOT NULL,
         done BOOLEAN DEFAULT FALSE,
-        border_color text DEFAULT "#000000",
+        border_color text DEFAULT '#000000',
         planner_id int REFERENCES planner(id) ON DELETE CASCADE,
         category_id int REFERENCES category(id) ON DELETE CASCADE,
         user_id int REFERENCES "user"(id) ON DELETE CASCADE,
