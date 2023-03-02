@@ -22,7 +22,7 @@ const middlewareLogin = {
 
   checkToken(request, response, next) {
     try {
-      console.log(request.headers.authorization.split(" ")[1]);
+      console.log('envoyé par le front: ', request.headers.authorization.split(" ")[1]);
 
       // on vérifie qu'il y a le token dans le headers authorization
       const token = request.headers.authorization.split(" ")[1];
