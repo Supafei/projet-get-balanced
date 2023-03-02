@@ -40,6 +40,7 @@ const taskController = {
                 description: newTask.description,
                 date: newTask.date,
                 done: newTask.done,
+                border_color: newTask.border_color,
                 planner_id: plannerId,
                 category_id: newTask.category_id,
                 user_id: newTask.user_id
