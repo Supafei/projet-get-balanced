@@ -7,7 +7,7 @@ DROP TABLE
     task,
     user_has_planner;
 
-CREATE DOMAIN email_address as text CHECK (VALUE ~ '^[a-z0-9][a-z_-!?.+0-9]*[a-z0-9]@[a-z]{1,63}\.[a-z]{2,63}$');
+-- CREATE DOMAIN email as text CHECK (VALUE ~ '^[a-z0-9][a-z_-!?.+0-9]*[a-z0-9]@[a-z]{1,63}\.[a-z]{2,63}$');
 
 CREATE TABLE
     "user" (
