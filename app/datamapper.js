@@ -139,12 +139,12 @@ const dataMapper = {
         let receivedValues = values;
         console.log(sqlQuery, receivedValues);
         try {
-            response = await client.query(sqlQuery);
+            response = await client.query(sqlQuery, receivedValues);
 
         } catch (error) {
             console.log(error);
         }
-        return response.rows[0];
+        return response.rows;
     },
 
 

@@ -32,7 +32,7 @@ router.get("/task/planner/:id", isLogged, checkToken, taskController.getPlannerT
 router.post("/task/planner/:id", isLogged, checkToken, taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
 router.put("/task/:idTask/planner/:idPlanner", isLogged, checkToken, taskController.updateTask); // modifie une tâche dans un tableau
 router.delete("/task/:id", isLogged, checkToken, taskController.deleteTask); // supprime une tâche dans un tableau
-router.get("/category/:idCat/planner/:idPlan/task/", isLogged, checkToken, plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
+router.get("/category/:idCat/planner/:idPlan/task/", /*isLogged, checkToken,*/ plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
 
 /** ROUTES CATEGORIES */
 router.get("/category/", isLogged, checkToken, categoryController.getAllCategories); // récupère toutes les catégories
