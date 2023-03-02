@@ -81,7 +81,9 @@ const userController = {
             // // On crée le refresh token et on le stocke en BDD 
             // const refreshToken = crypto.randomBytes(128).toString('base64');
 
+
             // // Mettre le token dans la table user
+
 
 
 
