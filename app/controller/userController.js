@@ -242,8 +242,8 @@ const userController = {
                 const token = request.headers.authorization.split(" ")[1];
 
                 // on décode le token 
-                const user = jwt.verify(token, process.env.SECRET_SESSION);
-                console.log("user de tokenExpire",user);
+                const verifyToken = jwt.verify(token, process.env.SECRET_SESSION);
+                let user = await dataMapper.getByCondition("\"user\"", "email", verifyToken.email);
 
                 return response.json({success: "Token valide", user});
 
