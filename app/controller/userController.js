@@ -94,7 +94,7 @@ const userController = {
         request.session.user = userFound;
         // console.log(request.session.user);
 
-        return response.json(userFound);
+        return response.json({userFound, token});
     },
 
     logOut(request, response) {
