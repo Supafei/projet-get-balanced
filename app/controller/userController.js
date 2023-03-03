@@ -215,7 +215,7 @@ const userController = {
             let counter = 1;
 
 
-            
+
             // pour chaque clé dans le body
             for (const key in updatedUserData) {
 
@@ -228,9 +228,9 @@ const userController = {
 
             let paramsQuery = bodyKeys.join(",");
 
-            let updateUser = await dataMapper.updateById("\"user\"", paramsQuery, bodyValues, updateUserId);
+            let user = await dataMapper.updateById("\"user\"", paramsQuery, bodyValues, updateUserId);
 
-            return response.json(updateUser);
+            return response.json({user});
         },
         //supprime un utilisateur
         async deleteUser(request, response) {

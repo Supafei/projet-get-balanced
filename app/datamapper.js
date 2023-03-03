@@ -170,7 +170,7 @@ const dataMapper = {
         } catch (error) {
             console.error(505);
         }
-        return response;
+        return response.rows[0];
     },
     
 };
