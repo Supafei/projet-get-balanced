@@ -200,12 +200,12 @@ const userController = {
             let clearPassword;
             if (request.body.password) {
                 clearPassword = request.body.password;
-            }
+            
 
             const encryptedPassword = await bcrypt.hash(clearPassword, 10);
 
             request.body.password = encryptedPassword;
-
+            }
             // Je veux identifier l'id de l'user à mettre à jour
             let updateUserId = request.params.id;
 
