@@ -234,7 +234,7 @@ const userController = {
             let userId = request.params.id;
             let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
 
-            console.log(`Le planning ${deleteUser.name} a été supprimé`);
+            console.log(`L'utilisateur ${deleteUser.firstname} ${deleteUser.lastname} a été supprimé`);
             return response.json(deleteUser);
         },
 

@@ -98,7 +98,7 @@ const plannerController = {
         let plannerId = request.params.id;
         let deletePlanner = await dataMapper.deleteOne("planner", plannerId);
 
-        console.log(`nombre de ligne supprimée: ${deletePlanner.rowCount}`);
+        console.log(`Le planning ${deletePlanner.name} a été supprimé`);
         return response.json(deletePlanner);
     },
     // récupère les tâches d’une catégorie d'un planner
