@@ -214,8 +214,11 @@ const userController = {
 
             let counter = 1;
 
+
+            
             // pour chaque clé dans le body
             for (const key in updatedUserData) {
+
                 bodyKeys.push(`${key}=$${counter}`);
                 counter++;
                 bodyValues.push(updatedUserData[key]);
