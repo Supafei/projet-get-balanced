@@ -67,7 +67,7 @@ const userController = {
                 token = jwt.sign({
                     email: user.email
                 }, process.env.SECRET_SESSION, {
-                    expiresIn: 300
+                    expiresIn: 172800
                 });
 
                 console.log("TOKEN : ", token);
@@ -118,6 +118,8 @@ const userController = {
         //     }
         // },
         // Ajoute un utilisateur en bdd
+
+        
         async addUser(request, response) {
 
             // on récupère les données du formulaire
@@ -174,7 +176,7 @@ const userController = {
             let token = jwt.sign({
                 email: email,
             }, process.env.SECRET_SESSION, {
-                expiresIn: 300
+                expiresIn: 172800
             });
 
             console.log("TOKEN : ", token);
