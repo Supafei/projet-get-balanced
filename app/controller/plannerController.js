@@ -93,7 +93,7 @@ const plannerController = {
 
     },
     // supprime un tableau
-    async deletePlanner(_, response) {
+    async deletePlanner(request, response) {
 
         let plannerId = request.params.id;
         let deletePlanner = await dataMapper.deleteOne("planner", plannerId);
