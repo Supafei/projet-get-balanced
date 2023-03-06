@@ -91,6 +91,7 @@ const taskController = {
         let deleteTask = await dataMapper.deleteOne("task", taskId);
 
         console.log(`nombre de ligne supprimée: ${deleteTask.rowCount}`);
+        console.log(`la tâche d'id ${taskId} a été supprimée`)
         return response.json(deleteTask);
     }
 }
