@@ -34,7 +34,7 @@ const taskController = {
         // {id : 1, title: 'faire les courses', description: 'bbbbbb', 
         // date: '2023-03-03', borderColor: null, userId: null, category: null}
 
-        addTaskInPlanner = await dataMapper.insertOne(
+        let addTaskInPlanner = await dataMapper.insertOne(
             {
                 name: newTask.name,
                 description: newTask.description,
