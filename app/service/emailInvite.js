@@ -8,21 +8,19 @@ async function main() {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-      user: "getbalanced3@gmail.com",
-      pass:"patatecarotte",
-    },
-    tls:{
-      rejectUnauthorized: false,
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "24677181c30c34",
+      pass: "a973e4594747ce"
     }
   });
 
   let mailOptions = {
     from: "getbalanced3@gmail.com",
-    to: "fetra.rabnehasy@gmail.com",
+    to: "fetra.rabehasy@gmail.com",
     subject: "test envoi depuis getBalanced",
-    text: "premier mail utilisant nodeMailer"
+    text: "Regarde Barbara, ça fonctionne!!!"
   }
 
  
