@@ -34,7 +34,7 @@ const userController = {
             } = request.body;
 
             // On vérifie que cet utilisateur existe dans la db avec cet email 
-            let user = await dataMapper.getByCondition("\"user\"", "email", `${email}`);
+            let user = await dataMapper.getByCondition("\"user\"", "email", `'${email}'`);
             // console.log("avant la condition userFound", userFound);
 
             if (!user) {
@@ -144,7 +144,7 @@ const userController = {
                 });
             }
             // je vérifie qu'il ny' a pas déjà cet email en BDD
-            let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", `${email}`);
+            let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", `'${email}'`);
             console.log("sql request", userWithSameEmail);
             if (userWithSameEmail) {
                 let errorMessage = 'Cet email est déjà utilisé.';
@@ -248,7 +248,7 @@ const userController = {
 
                 // on décode le token 
                 const verifyToken = jwt.verify(token, process.env.SECRET_SESSION);
-                let user = await dataMapper.getByCondition("\"user\"", "email", `${verifyToken.email}`);
+                let user = await dataMapper.getByCondition("\"user\"", "email", `'${verifyToken.email}'`);
 
                 return response.json({success: "Token valide", user});
 
