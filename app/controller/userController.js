@@ -240,7 +240,6 @@ const userController = {
             console.log(`L'utilisateur ${deleteUser.firstname} ${deleteUser.lastname} a été supprimé`);
             return response.json(deleteUser);
         },
-
         async tokenExpire(request, response) {
 
             try {

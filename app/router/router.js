@@ -29,7 +29,7 @@ router.delete("/planner/:id", checkToken, plannerController.deletePlanner); // s
 
 /** ROUTES TASK */
 router.get("/task/planner/:id", checkToken, taskController.getPlannerTasks); // récupère les tâches d'un user dans un tableau
-router.post("/task/planner/:id", checkToken, taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
+router.post("/task/planner/:id", /*checkToken,*/ taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
 router.put("/task/:idTask/planner/:idPlanner", checkToken, taskController.updateTask); // modifie une tâche dans un tableau
 router.delete("/task/:id", checkToken, taskController.deleteTask); // supprime une tâche dans un tableau
 router.get("/category/:idCat/planner/:idPlan/task/", checkToken, plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
