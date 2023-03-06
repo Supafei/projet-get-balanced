@@ -133,7 +133,7 @@ const dataMapper = {
     async getByCondition(table, column, value) {
         let response;
 
-        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = ${value};`;
         console.log(sqlQuery);
         try {
             response = await client.query(sqlQuery);
