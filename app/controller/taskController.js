@@ -14,7 +14,7 @@ const taskController = {
         // on récupère l'id du planner
         let plannerId = request.params.id;
 
-        let tasksInPlanner = await dataMapper.getByCondition("task", "planner_id", `${plannerId}`);
+        let tasksInPlanner = await dataMapper.getByCondition("task", "planner_id", plannerId);
 
         return response.json(tasksInPlanner);
 
