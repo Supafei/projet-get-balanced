@@ -17,6 +17,7 @@ const plannerController = {
         
 
         let getUserPlanners = await dataMapper.authorizedPlanner(userId);
+        
         console.log(getUserPlanners);
 
         return response.json(getUserPlanners);

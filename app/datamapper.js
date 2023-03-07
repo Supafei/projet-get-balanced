@@ -226,7 +226,7 @@ const dataMapper = {
         const sqlQuery =
             `SELECT * FROM planner WHERE planner.id = 
             ( SELECT planner_id FROM user_has_planner WHERE user_id = $1);`
-        let value = [id];
+        let value = id;
 
         try {
             console.log(sqlQuery);
