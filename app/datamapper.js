@@ -220,7 +220,7 @@ const dataMapper = {
     },
 
     // renvoie les planners pour lequel l'user a été invité
-    async authorizedPlanner() {
+    async authorizedPlanner(id) {
 
         let response;
         const sqlQuery =
@@ -235,10 +235,7 @@ const dataMapper = {
             console.log(error);
         }
 
-        if (response[rows].length > 1) {
-            return response.rows;
-        }
-        return response.rows[0];
+        return response.rows;
     }
 
 };
