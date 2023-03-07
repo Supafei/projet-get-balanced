@@ -146,7 +146,7 @@ const userController = {
             // je vérifie qu'il ny' a pas déjà cet email en BDD
             let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", `'${email}'`);
             console.log("sql request", userWithSameEmail);
-            if (userWithSameEmail) {
+            if (userWithSameEmail[0]) {
                 let errorMessage = 'Cet email est déjà utilisé.';
                 return response.json({
                     errorMessage

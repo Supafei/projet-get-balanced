@@ -11,13 +11,18 @@ const dataMapper = require('../datamapper');
 
 const plannerController = {
     // récupère tous les tableaux d'un user
-    async getUserPlanners(_, response) {
+    async getUserPlanners(request, response) {
 
-        let getAllPlanners = await dataMapper.getAll("planner");
-        console.log(getAllPlanners);
+        let userId = request.params.id;
+        
 
-        return response.json(getAllPlanners);
+        let getUserPlanners = await dataMapper.authorizedPlanner(userId);
+        console.log(getUserPlanners);
+
+        return response.json(getUserPlanners);
     },
+
+
     //récupère un tableau via son id avec ses données liées 
     async getPlanner(request, response) {
 
@@ -87,7 +92,7 @@ const plannerController = {
     },"user_has_planner" );
     
     console.log(variableCommeJeveux);
-    response.json(addPlanner);
+    return response.json(addPlanner);
 
    
 
@@ -98,9 +103,12 @@ const plannerController = {
         let plannerId = request.params.id;
         let deletePlanner = await dataMapper.deleteOne("planner", plannerId);
 
-        console.log(`Le planning ${deletePlanner.name} a été supprimé`);
+        console.log(`nombre de ligne supprimée: ${deletePlanner.rowCount}`);
+
         return response.json(deletePlanner);
     },
+
+
     // récupère les tâches d’une catégorie d'un planner
     async getCategoryTasks(request, response) {
      let categoryId = request.params.idCat;
