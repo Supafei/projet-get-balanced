@@ -100,7 +100,7 @@ const userController = {
 
 
         // j'omet le password
-        user = ({id, firstname, lastname, email, birthdate, avatar, color}) => ({id, firstname, lastname, email, birthdate, avatar, color});
+        // user = ({id, firstname, lastname, email, birthdate, avatar, color}) => ({id, firstname, lastname, email, birthdate, avatar, color});
 
         return response.json({
             user,
@@ -143,6 +143,7 @@ const userController = {
         }
         // je vérifie qu'il ny' a pas déjà cet email en BDD
         let userWithSameEmail = await dataMapper.getByCondition("\"user\"", "email", email);
+        
         console.log("sql request", userWithSameEmail);
         if (userWithSameEmail[0]) {
             let errorMessage = 'Cet email est déjà utilisé.';
