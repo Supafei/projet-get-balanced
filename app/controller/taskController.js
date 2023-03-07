@@ -55,9 +55,11 @@ const taskController = {
     async updateTask(request, response) {
 
         let taskData = request.body;
+        console.log("Ici est le TaskData", taskData);
 
         // Je veux identifier l'id de l'user à mettre à jour
         let taskId = request.params.idTask;
+        console.log("Ici est le TaskId", taskId);
 
         const bodyKeys = [];
         const bodyValues = [];
@@ -89,6 +91,7 @@ const taskController = {
         let deleteTask = await dataMapper.deleteOne("task", taskId);
 
         console.log(`nombre de ligne supprimée: ${deleteTask.rowCount}`);
+        console.log(`la tâche d'id ${taskId} a été supprimée`)
         return response.json(deleteTask);
     }
 }

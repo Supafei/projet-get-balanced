@@ -141,7 +141,7 @@ const dataMapper = {
         } catch (error) {
             console.log(error);
         }
-        return response.rows[0];
+        return response.rows;
 
     },
     async getBy2Conditions (table, cond1, cond2, value){

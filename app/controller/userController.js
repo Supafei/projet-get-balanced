@@ -49,7 +49,7 @@ const userController = {
 
             //on vérifie le password
             const validPassword = await bcrypt.compare(password, user.password);
-
+            console.log(validPassword);
             if (!validPassword) {
                 return response.status("401").json({
                     message: 'Incorrect password'
