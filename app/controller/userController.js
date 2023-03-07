@@ -39,7 +39,7 @@ const userController = {
         let user = await dataMapper.getOneByCondition("\"user\"", "email", email);
 
 
-        console.log("user.password", user.password);
+        // console.log("user.password", user.password);
 
         // Si on ne trouve pas l'user, on renvoie une erreur
         if (!user) {

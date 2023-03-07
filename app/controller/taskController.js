@@ -28,11 +28,7 @@ const taskController = {
         // on récupère le corps du formulaire
         let newTask = request.body;
         console.log("newtask", newTask);
-        // on récupère l'id de l'user
-        // let userId = request.session.id;
 
-        // {id : 1, title: 'faire les courses', description: 'bbbbbb', 
-        // date: '2023-03-03', borderColor: null, userId: null, category: null}
 
         let addTaskInPlanner = await dataMapper.insertOne(
             {
