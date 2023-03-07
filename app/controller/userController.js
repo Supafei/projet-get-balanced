@@ -33,10 +33,13 @@ const userController = {
                 password,
             } = request.body;
 
+            console.log("password du body", password);
+
             // On vérifie que cet utilisateur existe dans la db avec cet email 
-            let user = await dataMapper.getByCondition("\"user\"", "email", `'${email}'`);
+            let user = await dataMapper.getByCondition("\"user\"", "email", `${email}`);
             // console.log("avant la condition userFound", userFound);
 
+            console.log("user.password",user.password);
             if (!user) {
                 let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
                 return response.status("401").json({
