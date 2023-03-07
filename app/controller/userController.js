@@ -36,7 +36,7 @@ const userController = {
             console.log("password du body", password);
 
             // On vérifie que cet utilisateur existe dans la db avec cet email 
-            let user = await dataMapper.getByCondition("\"user\"", "email", `${email}`);
+            let user = await dataMapper.getByCondition("\"user\"", "email", `'${email}'`);
             // console.log("avant la condition userFound", userFound);
 
             console.log("user.password",user.password);
