@@ -159,13 +159,27 @@ const dataMapper = {
             console.log(error);
         }
 
-        if (response[rows].length > 1) {
-            return response.rows;
+        return response.rows;
+
+    },
+
+        async getOneByCondition(table, column, value) {
+        let response;
+
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;
+        console.log(sqlQuery);
+        try {
+            response = await client.query(sqlQuery);
+
+        } catch (error) {
+            console.log(error);
         }
 
         return response.rows[0];
 
     },
+
+
 
 
     async getBy2Conditions(table, cond1, cond2, value) {
@@ -224,7 +238,7 @@ const dataMapper = {
         if (response[rows].length > 1) {
             return response.rows;
         }
-        return response.rows;
+        return response.rows[0];
     }
 
 };
