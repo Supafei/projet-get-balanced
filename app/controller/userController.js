@@ -100,25 +100,25 @@ const userController = {
 
 
         // j'omet le password
-        user = ({
-            id,
-            firstname,
-            lastname,
-            email,
-            birthdate,
-            avatar,
-            color
-        }) => ({
-            id,
-            firstname,
-            lastname,
-            email,
-            birthdate,
-            avatar,
-            color
-        });
-        
-        console.log(user);
+        // user = ({
+        //     id,
+        //     firstname,
+        //     lastname,
+        //     email,
+        //     birthdate,
+        //     avatar,
+        //     color
+        // }) => ({
+        //     id,
+        //     firstname,
+        //     lastname,
+        //     email,
+        //     birthdate,
+        //     avatar,
+        //     color
+        // });
+
+        // console.log(user);
         return response.json({
             user,
             token
