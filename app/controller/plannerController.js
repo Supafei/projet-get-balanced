@@ -14,10 +14,10 @@ const plannerController = {
     async getUserPlanners(request, response) {
 
         let userId = request.params.id;
-        
+    
 
         let getUserPlanners = await dataMapper.authorizedPlanner(userId);
-        
+
         console.log(getUserPlanners);
 
         return response.json(getUserPlanners);
