@@ -16,9 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
-const mutipartParser = multer();
-app.use(mutipartParser.none());
-
 const router = require("./app/router/router");
 
 app.use(router);
