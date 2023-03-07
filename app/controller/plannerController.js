@@ -27,7 +27,7 @@ const plannerController = {
     async getPlanner(request, response) {
 
         let plannerId = request.params.id;
-        let getPlanner = await dataMapper.getOneById("planner", plannerId);
+        let getPlanner = await dataMapper.getOneById("planner", "id", plannerId);
         return response.json(getPlanner);
 
     },
@@ -61,6 +61,7 @@ const plannerController = {
 
         return response.json(updatePlanner);
     },
+
     // ajoute un tableau
     async createPlanner(request, response) {
     // Je veux récupérer les données du formulaire
@@ -86,12 +87,12 @@ const plannerController = {
     console.log(addPlanner);
     // je veux incrémenter la table user_has_planner
     let userId = request.params.id;
-    let variableCommeJeveux = await dataMapper.insertOne({
+    let insertAssociation = await dataMapper.insertOne({
         user_id: userId,
         planner_id: addPlanner.id
     },"user_has_planner" );
     
-    console.log(variableCommeJeveux);
+    console.log(insertAssociation);
     return response.json(addPlanner);
 
    

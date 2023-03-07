@@ -1,23 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 const middlewareLogin = {
-  // vérifie qu'un client est bien connecté
-  // sinon redirige vers la page de connexion
-  isLogged(request, response, next) {
-
-    console.log(request.session);
-    console.log(request.session.user);
-
-    if (!request.session.user) {
-      return response.status("401").json({
-        message: 'Not logged'
-      });
-
-    }
-    response.json(request.session);
-    next();
-
-  },
 
 
   checkToken(request, response, next) {

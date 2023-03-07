@@ -35,20 +35,31 @@ const dataMapper = {
 
     },
     //fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
-    async getOneById(table, id) {
+    async getOneById(table, parameter, id) {
         let response;
-        const sqlQuery = ` SELECT * FROM ${table} WHERE id = ${id}`
+        const sqlQuery = ` SELECT * FROM ${table} WHERE ${parameter} = $1`;
+        let values = [id];
+
         console.log(sqlQuery);
 
         try {
-            response = await client.query(sqlQuery);
+            response = await client.query(sqlQuery, values);
 
             console.log(response);
+
         } catch (error) {
             console.log(error);
         }
+
+        if (response[rows].length > 1) {
+            return response.rows;
+        }
+
         return response.rows[0];
     },
+
+
+
     // fonction générique qui permet d'ajouter une donnée en bdd
     async insertOne(body, table) {
         let response;
@@ -115,14 +126,18 @@ const dataMapper = {
         }
         return response.rows[0];
     },
+
+
+
     // fonction générique qui permet de supprimer une donnée en bdd
     async deleteOne(table, id) {
         let response;
-        const sqlQuery = ` DELETE FROM ${table} WHERE id = ${id} RETURNING *`
+        const sqlQuery = ` DELETE FROM ${table} WHERE id = $1 RETURNING *;`
+        let values = [id];
         console.log(sqlQuery);
 
         try {
-            response = await client.query(sqlQuery);
+            response = await client.query(sqlQuery, values);
 
 
         } catch (error) {
@@ -130,10 +145,12 @@ const dataMapper = {
         }
         return response.rows[0];
     },
+
+
     async getByCondition(table, column, value) {
         let response;
 
-        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = ${value};`;
+        const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;
         console.log(sqlQuery);
         try {
             response = await client.query(sqlQuery);
@@ -141,23 +158,38 @@ const dataMapper = {
         } catch (error) {
             console.log(error);
         }
-        return response.rows;
+
+        if (response[rows].length > 1) {
+            return response.rows;
+        }
+
+        return response.rows[0];
 
     },
-    async getBy2Conditions (table, cond1, cond2, value){
+
+
+    async getBy2Conditions(table, cond1, cond2, value) {
         let response;
 
         const sqlQuery = `SELECT * FROM ${table} WHERE ${cond1} AND ${cond2};`;
-        let receivedValues = value;
+        let values = value;
+
         console.log(sqlQuery, receivedValues);
+
         try {
-            response = await client.query(sqlQuery, receivedValues);
+            response = await client.query(sqlQuery, values);
 
         } catch (error) {
             console.log(error);
         }
-        return response.rows;
+
+        if (response[rows].length > 1) {
+            return response.rows;
+        }
+        return response.rows[0];
     },
+
+
     // fonction générique qui permet de mettre à jour une donnée par son id en bdd
     async updateById(table, column, value, id) {
         let response;
@@ -172,7 +204,29 @@ const dataMapper = {
         }
         return response.rows[0];
     },
-    
+
+    // renvoie les planners pour lequel l'user a été invité
+    async authorizedPlanner() {
+
+        let response;
+        const sqlQuery =
+            `SELECT * FROM planner WHERE planner.id = 
+            ( SELECT planner_id FROM user_has_planner WHERE user_id = $1);`
+        let value = [id];
+
+        try {
+            console.log(sqlQuery);
+            response = await client.query(sqlQuery, value)
+        } catch (error) {
+            console.log(error);
+        }
+
+        if (response[rows].length > 1) {
+            return response.rows;
+        }
+        return response.rows;
+    }
+
 };
 
 module.exports = dataMapper;

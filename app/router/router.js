@@ -5,7 +5,7 @@ const taskController = require("../controller/taskController");
 const userController = require ("../controller/userController");
 
 // middlewares
-const {isLogged, checkToken} = require("../middleware/middlewareLogin");
+const { checkToken} = require("../middleware/middlewareLogin");
 
 
 
@@ -15,7 +15,6 @@ const router = express.Router();
 /** ROUTES USER  */
 router.get("/user/:id", checkToken, userController.getUser); // récupère le profil d'un user
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
-// router.get("user/logout", isLogged, checkToken, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
 router.patch("/user/:id", checkToken, userController.updateUser); // modifier un utilisateur en bdd
 router.delete("/user/:id", checkToken, userController.deleteUser ); //supprime un utilisateur
