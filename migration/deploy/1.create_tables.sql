@@ -50,6 +50,7 @@ CREATE TABLE
         done BOOLEAN DEFAULT FALSE,
         border_color text DEFAULT '#000000',
         planner_id int REFERENCES planner(id) ON DELETE CASCADE,
+        category text,
         category_id int REFERENCES category(id) ON DELETE CASCADE,
         user_id int REFERENCES "user"(id) ON DELETE CASCADE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
