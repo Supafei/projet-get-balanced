@@ -268,7 +268,7 @@ const userController = {
 
             // on décode le token 
             const verifyToken = jwt.verify(token, process.env.SECRET_SESSION);
-            let user = await dataMapper.getByCondition("\"user\"", "email", verifyToken.email);
+            let user = await dataMapper.getOneByCondition("\"user\"", "email", verifyToken.email);
             console.log(user);
 
             return response.json({
