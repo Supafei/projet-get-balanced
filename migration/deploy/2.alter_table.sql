@@ -1,0 +1,6 @@
+BEGIN;
+
+ALTER TABLE IF EXISTS task
+    ADD COLUMN category text;
+
+COMMIT;
