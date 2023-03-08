@@ -163,7 +163,7 @@ const dataMapper = {
 
     },
 
-        async getOneByCondition(table, column, value) {
+    async getOneByCondition(table, column, value) {
         let response;
 
         const sqlQuery = `SELECT * FROM ${table} WHERE ${column} = '${value}';`;

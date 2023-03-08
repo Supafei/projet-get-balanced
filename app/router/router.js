@@ -17,7 +17,7 @@ router.get("/user/:id", checkToken, userController.getUser); // récupère le pr
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
 router.patch("/user/:id", checkToken, userController.updateUser); // modifier un utilisateur en bdd
-router.delete("/user/:id", checkToken, userController.deleteUser ); //supprime un utilisateur
+router.delete("/user/:id", checkToken, userController.deleteUser); //supprime un utilisateur
 
 /** ROUTES PLANNER */
 router.get("/planner/user/:id", checkToken,plannerController.getUserPlanners); // récupère tous les tableaux d'un user

@@ -247,8 +247,11 @@ const userController = {
             user
         });
     },
+
+
     //supprime un utilisateur
     async deleteUser(request, response) {
+        
         let userId = request.params.id;
         let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
 
