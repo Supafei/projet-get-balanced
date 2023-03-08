@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const nodeoutlook = require('nodejs-nodemailer-outlook')
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
@@ -8,17 +9,21 @@ async function main() {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+    port: 587,
+    tls:{
+      ciphers: "SSLv3"
+    },
     auth: {
-      user: "24677181c30c34",
-      pass: "a973e4594747ce"
+      user: "getbalanced@outlook.fr",
+      pass: "patatecarotte1234"
     }
   });
 
   let mailOptions = {
-    from: "getbalanced3@gmail.com",
-    to: "fetra.rabehasy@gmail.com",
+    from: "getbalanced@outlook.fr",
+    to: "barbaraouisse@hotmail.com",
     subject: "test envoi depuis getBalanced",
     text: "Regarde Barbara, ça fonctionne!!!"
   }
