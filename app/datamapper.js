@@ -38,7 +38,7 @@ const dataMapper = {
     async getOneById(table, parameter, id) {
         let response;
         const sqlQuery = ` SELECT * FROM ${table} WHERE ${parameter} = $1`;
-        let values = [id];
+        let values = [parseInt(id)];
 
         console.log(sqlQuery);
 
