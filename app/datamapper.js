@@ -142,6 +142,7 @@ const dataMapper = {
 
         } catch (error) {
             console.log(error);
+            return response.json(error);
         }
         return response.rows[0];
     },

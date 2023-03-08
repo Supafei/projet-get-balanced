@@ -253,6 +253,7 @@ const userController = {
     async deleteUser(request, response) {
 
         let userId = request.params.id;
+        console.log(userId);
         let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
 
         console.log(`L'utilisateur ${deleteUser.firstname} ${deleteUser.lastname} a été supprimé`);
