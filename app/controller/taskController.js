@@ -28,11 +28,7 @@ const taskController = {
         // on récupère le corps du formulaire
         let newTask = request.body;
         console.log("newtask", newTask);
-        // on récupère l'id de l'user
-        // let userId = request.session.id;
 
-        // {id : 1, title: 'faire les courses', description: 'bbbbbb', 
-        // date: '2023-03-03', borderColor: null, userId: null, category: null}
 
         let addTaskInPlanner = await dataMapper.insertOne(
             {
@@ -55,9 +51,11 @@ const taskController = {
     async updateTask(request, response) {
 
         let taskData = request.body;
+        console.log("Ici est le TaskData", taskData);
 
         // Je veux identifier l'id de l'user à mettre à jour
         let taskId = request.params.idTask;
+        console.log("Ici est le TaskId", taskId);
 
         const bodyKeys = [];
         const bodyValues = [];
@@ -89,6 +87,7 @@ const taskController = {
         let deleteTask = await dataMapper.deleteOne("task", taskId);
 
         console.log(`nombre de ligne supprimée: ${deleteTask.rowCount}`);
+        console.log(`la tâche d'id ${taskId} a été supprimée`)
         return response.json(deleteTask);
     }
 }

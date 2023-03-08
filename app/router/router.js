@@ -5,7 +5,7 @@ const taskController = require("../controller/taskController");
 const userController = require ("../controller/userController");
 
 // middlewares
-const {isLogged, checkToken} = require("../middleware/middlewareLogin");
+const { checkToken} = require("../middleware/middlewareLogin");
 
 
 
@@ -15,7 +15,6 @@ const router = express.Router();
 /** ROUTES USER  */
 router.get("/user/:id", checkToken, userController.getUser); // récupère le profil d'un user
 router.post("/user/login", userController.loginUser ); // router pour logguer un utilisateur
-// router.get("user/logout", isLogged, checkToken, userController.logOut); // route pour déconnecter l'utilisateur
 router.post("/user", userController.addUser); // Ajoute un utilisateur en bdd
 router.patch("/user/:id", checkToken, userController.updateUser); // modifier un utilisateur en bdd
 router.delete("/user/:id", checkToken, userController.deleteUser ); //supprime un utilisateur
@@ -29,8 +28,8 @@ router.delete("/planner/:id", checkToken, plannerController.deletePlanner); // s
 
 /** ROUTES TASK */
 router.get("/task/planner/:id", checkToken, taskController.getPlannerTasks); // récupère les tâches d'un user dans un tableau
-router.post("/task/planner/:id", /*checkToken,*/ taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
-router.put("/task/:idTask/planner/:idPlanner", checkToken, taskController.updateTask); // modifie une tâche dans un tableau
+router.post("/task/planner/:id", checkToken, taskController.addTaskInPlanner); // ajoute un tâche dans un tableau
+router.put("/task/:idTask", checkToken, taskController.updateTask); // modifie une tâche dans un tableau
 router.delete("/task/:id", checkToken, taskController.deleteTask); // supprime une tâche dans un tableau
 router.get("/category/:idCat/planner/:idPlan/task/", checkToken, plannerController.getCategoryTasks); //récupère les tâches d’une catégorie dans un planner
 

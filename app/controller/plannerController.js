@@ -11,18 +11,24 @@ const dataMapper = require('../datamapper');
 
 const plannerController = {
     // récupère tous les tableaux d'un user
-    async getUserPlanners(_, response) {
+    async getUserPlanners(request, response) {
 
-        let getAllPlanners = await dataMapper.getAll("planner");
-        console.log(getAllPlanners);
+        let userId = request.params.id;
+    
 
-        return response.json(getAllPlanners);
+        let getUserPlanners = await dataMapper.authorizedPlanner(userId);
+
+        console.log(getUserPlanners);
+
+        return response.json(getUserPlanners);
     },
+
+
     //récupère un tableau via son id avec ses données liées 
     async getPlanner(request, response) {
 
         let plannerId = request.params.id;
-        let getPlanner = await dataMapper.getOneById("planner", plannerId);
+        let getPlanner = await dataMapper.getOneById("planner", "id", plannerId);
         return response.json(getPlanner);
 
     },
@@ -56,6 +62,7 @@ const plannerController = {
 
         return response.json(updatePlanner);
     },
+
     // ajoute un tableau
     async createPlanner(request, response) {
     // Je veux récupérer les données du formulaire
@@ -81,13 +88,13 @@ const plannerController = {
     console.log(addPlanner);
     // je veux incrémenter la table user_has_planner
     let userId = request.params.id;
-    let variableCommeJeveux = await dataMapper.insertOne({
+    let insertAssociation = await dataMapper.insertOne({
         user_id: userId,
         planner_id: addPlanner.id
     },"user_has_planner" );
     
-    console.log(variableCommeJeveux);
-    response.json(addPlanner);
+    console.log(insertAssociation);
+    return response.json(addPlanner);
 
    
 
@@ -98,9 +105,12 @@ const plannerController = {
         let plannerId = request.params.id;
         let deletePlanner = await dataMapper.deleteOne("planner", plannerId);
 
-        console.log(`Le planning ${deletePlanner.name} a été supprimé`);
+        console.log(`nombre de ligne supprimée: ${deletePlanner.rowCount}`);
+
         return response.json(deletePlanner);
     },
+
+
     // récupère les tâches d’une catégorie d'un planner
     async getCategoryTasks(request, response) {
      let categoryId = request.params.idCat;
