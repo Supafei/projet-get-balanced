@@ -1,12 +1,15 @@
 const nodemailer = require("nodemailer");
-const nodeoutlook = require('nodejs-nodemailer-outlook')
+const nodeoutlook = require('nodejs-nodemailer-outlook');
+const dataMapper = require("../datamapper");
 
 
 const emailInvite = {
     // async..await is not allowed in global scope, must use a wrapper
-    async function main() {
+    async sendMail(receiverEmail, senderFirstName, senderLastName, plannerId) {
 
       try {
+
+        let getPlanner = await dataMapper.getOneById("planner", "id", plannerId);
         // Generate test SMTP service account from ethereal.email
         // Only needed if you don't have a real mail account for testing
         let testAccount = await nodemailer.createTestAccount();
@@ -27,9 +30,9 @@ const emailInvite = {
 
         let mailOptions = {
           from: "getbalanced@outlook.fr",
-          to: "barbaraouisse@hotmail.com",
+          to: receiverEmail,
           subject: "test envoi depuis getBalanced",
-          text: "Regarde Barbara, ça fonctionne!!!"
+          text: `Cet email d'invitation a été envoyé par ${senderFirstName} ${senderLastName} pour rejoindre le planner ${getPlanner.name}`
         }
 
 
@@ -51,8 +54,11 @@ const emailInvite = {
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
-      } catch () {
+      } catch (error) {
 
-        main().catch(console.error);
+        console.log(error);
       }
     }
+  }
+
+  module.exports = emailInvite;

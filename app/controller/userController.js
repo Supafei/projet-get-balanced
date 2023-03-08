@@ -251,7 +251,7 @@ const userController = {
 
     //supprime un utilisateur
     async deleteUser(request, response) {
-        
+
         let userId = request.params.id;
         let deleteUser = await dataMapper.deleteOne("\"user\"", userId);
 
@@ -269,6 +269,7 @@ const userController = {
             // on décode le token 
             const verifyToken = jwt.verify(token, process.env.SECRET_SESSION);
             let user = await dataMapper.getByCondition("\"user\"", "email", verifyToken.email);
+            console.log(user);
 
             return response.json({
                 success: "Token valide",
