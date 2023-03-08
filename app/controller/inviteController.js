@@ -11,12 +11,14 @@ const emailInvite = require('../service/emailInvite');
 const inviteController = {
 
     async sendInvite (request,response) {
-        
         let emailToInvite = request.body.email;
+        console.log(request)
 
-        let senderFirstName = request.;
-        let senderLastName = request.body.lastname;
-        let sendInvite = await emailInvite.sendMail();
+        // let senderFirstName = request.;
+        // let senderLastName = 
+        // let sendInvite = await emailInvite.sendMail();
+
+        return response.json
     }
 
 }
