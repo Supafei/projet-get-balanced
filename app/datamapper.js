@@ -45,8 +45,6 @@ const dataMapper = {
         try {
             response = await client.query(sqlQuery, values);
 
-            console.log(response);
-
         } catch (error) {
             console.log(error);
         }
