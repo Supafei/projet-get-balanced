@@ -197,6 +197,13 @@ const userController = {
 
         console.log("TOKEN : ", token);
 
+        let inviteToPlanner = await dataMapper.getOneByCondition("invite", "user_email", email);
+        
+        if (inviteToPlanner){
+            let addPlannerAccess = await dataMapper.insertOne({user_id : user.id,
+            planner_id : inviteToPlanner.planner_id}, "user_has_planner");
+        }
+
         response.json({
             user,
             token
