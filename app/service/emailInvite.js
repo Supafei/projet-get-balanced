@@ -23,16 +23,16 @@ const emailInvite = {
             ciphers: "SSLv3"
           },
           auth: {
-            user: "getbalanced@outlook.fr",
-            pass: "patatecarotte1234"
+            user: process.ENV.USERMAIL,
+            pass: process.ENV.PASSWORDMAIL
           }
         });
 
         let mailOptions = {
-          from: "getbalanced@outlook.fr",
+          from: process.ENV.USERMAIL,
           to: receiverEmail,
-          subject: "test envoi depuis getBalanced",
-          text: `Cet email d'invitation a été envoyé par ${senderFirstName} ${senderLastName} pour rejoindre le planner ${getPlanner.name}`
+          subject: "Venez prendre votre part",
+          text: `${emailContent}`
         }
 
 

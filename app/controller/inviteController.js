@@ -35,7 +35,7 @@ const inviteController = {
 
         let giveAuthorization = await dataMapper.insertOne({user_id: userHostId, planner_id : plannerId},"user_has_planner");
 
-        let sendInvite = await emailInvite.sendMail(emailToInvite, getUserData.firstname, getUserData.lastname, plannerId);
+        let sendInvite = await emailInvite.sendMail(emailToInvite, getUserData.firstname, getUserData.lastname, plannerId, emailContent);
 
         return response.json(sendInvite);
     }
