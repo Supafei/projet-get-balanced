@@ -3,6 +3,7 @@ const nodeoutlook = require('nodejs-nodemailer-outlook');
 const dataMapper = require("../datamapper");
 
 
+
 const emailInvite = {
     // async..await is not allowed in global scope, must use a wrapper
     async sendMail(receiverEmail, senderFirstName, senderLastName, plannerId, emailContent) {
@@ -23,8 +24,8 @@ const emailInvite = {
             ciphers: "SSLv3"
           },
           auth: {
-            user: process.ENV.USERMAIL,
-            pass: process.ENV.PASSWORDMAIL
+            user: process.env.USERMAIL,
+            pass: process.env.USERPASSWORD
           }
         });
 
