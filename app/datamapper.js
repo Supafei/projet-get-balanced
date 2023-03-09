@@ -26,7 +26,6 @@ const dataMapper = {
         try {
             response = await client.query(sqlQuery);
 
-            console.log(response);
         } catch (error) {
             console.log(error);
         }

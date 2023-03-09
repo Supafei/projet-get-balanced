@@ -5,7 +5,7 @@ const dataMapper = require("../datamapper");
 
 const emailInvite = {
     // async..await is not allowed in global scope, must use a wrapper
-    async sendMail(receiverEmail, senderFirstName, senderLastName, plannerId) {
+    async sendMail(receiverEmail, senderFirstName, senderLastName, plannerId, emailContent) {
 
       try {
 
