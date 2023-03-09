@@ -10,15 +10,16 @@ const emailInvite = require('../service/emailInvite');
 
 const inviteController = {
 
-    async sendInvite (request,response) {
+    async sendInvite(request, response) {
         let emailToInvite = request.body.email;
-        console.log(request)
+        let userGuestId = request.params.userId;
+        let plannerId = request.params.plannerId;
 
-        // let senderFirstName = request.;
-        // let senderLastName = 
-        // let sendInvite = await emailInvite.sendMail();
+        let getUserData = await dataMapper.getOneById("\"user\"", "id", userGuestId);
 
-        return response.json
+        let sendInvite = await emailInvite.sendMail(emailToInvite, getUserData.firstname, getUserData.lastname, plannerId);
+
+        return response.json(sendInvite);
     }
 
 }

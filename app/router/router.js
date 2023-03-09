@@ -1,5 +1,6 @@
 const express = require("express");
 const categoryController = require ("../controller/categoryController");
+const inviteController = require("../controller/inviteController");
 const plannerController = require ("../controller/plannerController");
 const taskController = require("../controller/taskController");
 const userController = require ("../controller/userController");
@@ -38,5 +39,6 @@ router.get("/category/", checkToken, categoryController.getAllCategories); // r�
 
 router.get("/token", userController.tokenExpire) // vérifie la validité/expiration du token
 
+router.get("/invite/:userId/planner/:plannerId", inviteController.sendInvite);
 
 module.exports = router;

@@ -51,6 +51,10 @@ const dataMapper = {
             console.log(error);
         }
 
+        if (response.rows.length >1) {
+            return response.rows;
+        }
+
         return response.rows[0];
     },
 

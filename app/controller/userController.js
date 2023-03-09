@@ -44,7 +44,7 @@ const userController = {
         // Si on ne trouve pas l'user, on renvoie une erreur
         if (!user) {
             let errorMessage = 'Aucun utilisateur-trice trouvé(e) avec cet email! ';
-            return response.status(401).json({
+            return response.status(200).json({
                 errorMessage
             });
         }
