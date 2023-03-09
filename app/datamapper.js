@@ -36,6 +36,7 @@ const dataMapper = {
     //fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
     async getOneById(table, parameter, id) {
         let response;
+        console.log("id dans getOneById",id);
         const sqlQuery = ` SELECT * FROM ${table} WHERE ${parameter} = $1`;
         let values = [parseInt(id)];
 
