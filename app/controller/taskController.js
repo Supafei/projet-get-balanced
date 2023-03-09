@@ -16,7 +16,7 @@ const taskController = {
 
         console.log("PLANNER ID dans get planner tasks",plannerId);
 
-        let tasksInPlanner = await dataMapper.getOneById("task", "planner_id", plannerId);
+        let tasksInPlanner = await dataMapper.getSeveralById("task", "planner_id", plannerId);
 
         return response.json(tasksInPlanner);
 

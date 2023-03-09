@@ -49,12 +49,28 @@ const dataMapper = {
             console.log(error);
         }
 
-        if (response.rows.length >1) {
-            return response.rows;
-        }
-
         return response.rows[0];
     },
+
+        //fonction générique qui permet de selectionner un élément d'une table en fonction de son id 
+        async getSeveralById(table, parameter, id) {
+            let response;
+            console.log("id dans getOneById",id);
+            const sqlQuery = ` SELECT * FROM ${table} WHERE ${parameter} = $1`;
+            let values = [parseInt(id)];
+    
+            console.log(sqlQuery);
+    
+            try {
+                response = await client.query(sqlQuery, values);
+    
+            } catch (error) {
+                console.log(error);
+            }
+
+                return response.rows;
+
+        },
 
 
 
