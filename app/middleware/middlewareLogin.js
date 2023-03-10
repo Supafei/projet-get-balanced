@@ -6,9 +6,6 @@ const middlewareLogin = {
   checkToken(request, response, next) {
     try {
 
-    
-
-      console.log("request.headers.authorization",request.headers.authorization);
 
       console.log('envoyé par le front: ', request.headers.authorization.split(" ")[1]);
 

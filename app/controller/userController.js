@@ -147,7 +147,7 @@ const userController = {
         } = request.body;
 
         console.log("body", firstname, lastname, email, password, confirmPassword);
-        console.log(request.body);
+ 
         let user;
 
 
