@@ -32,7 +32,7 @@ const emailInvite = {
         });
 
         let mailOptions = {
-          from: process.ENV.USERMAIL,
+          from: process.env.USERMAIL,
           to: receiverEmail,
           subject: "Venez prendre votre part",
           text: `${emailContent}`
