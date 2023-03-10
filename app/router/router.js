@@ -39,6 +39,6 @@ router.get("/category/", checkToken, categoryController.getAllCategories); // r�
 
 router.get("/token", userController.tokenExpire) // vérifie la validité/expiration du token
 
-router.get("/invite/:userId/planner/:plannerId", inviteController.sendInvite);
+router.post("/invite/:userId/planner/:plannerId", inviteController.sendInvite);
 
 module.exports = router;
