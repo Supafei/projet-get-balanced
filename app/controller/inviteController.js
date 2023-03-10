@@ -36,7 +36,7 @@ const inviteController = {
 
             //j'ajoute l'authorisation dans la table user_has_planner
             let giveAuthorization = await dataMapper.insertOne({
-                user_id: userHostId,
+                user_id: findGuest.id,
                 planner_id: plannerId
             }, "user_has_planner");
 
