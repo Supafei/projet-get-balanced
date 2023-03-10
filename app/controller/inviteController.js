@@ -15,6 +15,8 @@ const inviteController = {
 
     async sendInvite(request, response) {
 
+        console.log(request.body);
+
         let emailToInvite = request.body.email;
         console.log("email à inviter",emailToInvite);
         let userHostId = request.params.userId;

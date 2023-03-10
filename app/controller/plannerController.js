@@ -13,7 +13,7 @@ const plannerController = {
     // récupère tous les tableaux d'un user
     async getUserPlanners(request, response) {
 
-        console.log(request);
+
 
         let userId = request.params.id;
     
