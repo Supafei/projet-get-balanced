@@ -58,7 +58,7 @@ const inviteController = {
                 planner_id: plannerId
             }, "invite");
 
-            emailContent = `${getUserData.firstname} ${getUserData.lastname} vous a invité à rejoindre le planning ${getPlanner.name} sur l'application Get Balanced. Pour vous inscrire, cliquez sur ce lien`;
+            emailContent = `${getUserData.firstname} ${getUserData.lastname} vous a invité à rejoindre le planning ${getPlanner.name} sur l'application Get Balanced. Pour vous inscrire, cliquez sur ce lien https://getbalanced.netlify.app/signup`;
         }
 
 
