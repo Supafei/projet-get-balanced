@@ -1,31 +1,39 @@
 const dataMapper = require('../datamapper');
 
+/**
+ * Represente les méthodes pour récupérer toutes les catégories
+ * @param {*} request
+ * @param {*} response
+ * 
+ */
+
+
 const categoryController = {
 // récupère toutes les catégories
-    async getAllCategories (_,response) {
+    async getAllCategories (request,response) {
         
-         let getCategories = await dataMapper.getAll("category");
-         console.log(getCategories);
+        let getCategories = await dataMapper.getAll("category");
+        console.log(getCategories);
 
         return response.json(getCategories);
 
     },
 //récupère les tâches d’une catégorie dans un planner
-    async getCategoryTasks () {
+   
 
-    },
-//créer une catégorie
-    async createCategory () {
+/** Méthodes dans une prochaine version */
+// //créer une catégorie
+//     async createCategory () {
+//         let newCategory
+//     },
+// //supprimer une catégorie
+//     async deleteCategory () {
 
-    },
-//supprimer une catégorie
-    async deleteCategory () {
+//     },
+// //modifier une catégorie
+//     async updateCategory (){
 
-    },
-//modifier une catégorie
-    async updateCategory (){
-
-    }
+//     }
 }
 
 module.exports = categoryController;

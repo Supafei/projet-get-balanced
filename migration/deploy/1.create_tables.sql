@@ -7,7 +7,8 @@ DROP TABLE
     task,
     user_has_planner;
 
--- CREATE DOMAIN email_address as text CHECK (VALUE ~ '^[a-z0-9][a-z_-!?.+0-9]*[a-z0-9]@[a-z]{1,63}\.[a-z]{2,63}$');
+
+-- CREATE DOMAIN email as text CHECK (VALUE ~ '^[a-z0-9][a-z_-!?.+0-9]*[a-z0-9]@[a-z]{1,63}\.[a-z]{2,63}$');
 
 CREATE TABLE
     "user" (
@@ -18,6 +19,7 @@ CREATE TABLE
         birthdate TIMESTAMPTZ,
         avatar text,
         password text NOT NULL,
+        token text,
         color text NOT NULL DEFAULT '#b0b',
         created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMPTZ
@@ -46,6 +48,7 @@ CREATE TABLE
         description text,
         date TIMESTAMPTZ NOT NULL,
         done BOOLEAN DEFAULT FALSE,
+        border_color text DEFAULT '#000000',
         planner_id int REFERENCES planner(id) ON DELETE CASCADE,
         category_id int REFERENCES category(id) ON DELETE CASCADE,
         user_id int REFERENCES "user"(id) ON DELETE CASCADE,
